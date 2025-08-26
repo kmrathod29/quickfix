@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuickFix - Welcome</title>
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body {
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+        background:linear-gradient(-45deg,#ff6a00,#ee0979,#00c6ff,#0072ff);
+        background-size:400% 400%;
+        animation:gradientBG 8s ease infinite;
+        color:white;
+        text-align:center;
+    }
+    @keyframes gradientBG {
+        0%{background-position:0% 50%;}
+        50%{background-position:100% 50%;}
+        100%{background-position:0% 50%;}
+    }
+    .welcome-container{max-width:600px;padding:20px;}
+    h1{font-size:3rem;font-weight:bold;text-transform:uppercase;margin-bottom:10px;}
+    .tagline{font-size:1.5rem;font-weight:300;margin-bottom:20px;}
+    .typewriter{
+        font-size:1.2rem;border-right:2px solid #fff;white-space:nowrap;overflow:hidden;width:0;
+        animation:typing 4s steps(30,end) forwards,blink .7s infinite;
+    }
+    @keyframes typing{from{width:0}to{width:100%}}
+    @keyframes blink{50%{border-color:transparent}}
+    .btn{
+        display:inline-block;padding:14px 30px;background:#fff;color:#ff6a00;font-weight:bold;
+        font-size:1.2rem;border-radius:50px;text-decoration:none;transition:.3s;
+    }
+    .btn:hover{background:#ff6a00;color:#fff;transform:scale(1.05);}
+</style>
+</head>
+<body>
+<div class="welcome-container">
+    <h1>QuickFix</h1>
+    <p class="tagline">On-Demand Home Repair Services</p>
+    <p class="typewriter">Your Home, Our Priority!</p>
+    <br><br>
+    <a href="login.html" class="btn">Get Started</a>
+</div>
+</body>
+</html>

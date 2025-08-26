@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuickFix - Services</title>
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body{
+        background:#f7f8fa;
+        padding:20px;
+    }
+    h2{
+        text-align:center;
+        margin-bottom:20px;
+        color:#333;
+        animation:fadeInDown 1s ease;
+    }
+    @keyframes fadeInDown{
+        from{opacity:0;transform:translateY(-20px);}
+        to{opacity:1;transform:translateY(0);}
+    }
+
+    .grid{
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+        gap:20px;
+        opacity:0;
+        animation:fadeIn 1.2s ease forwards;
+        animation-delay:0.5s;
+    }
+    @keyframes fadeIn{
+        to{opacity:1;}
+    }
+
+    .card{
+        background:#fff;
+        border-radius:15px;
+        box-shadow:0 4px 6px rgba(0,0,0,0.1);
+        text-align:center;
+        padding:20px;
+        transition:0.4s;
+        transform:scale(0.95);
+    }
+    .card img{
+        width:80px;
+        height:80px;
+        margin-bottom:10px;
+        transition:0.3s;
+    }
+    .card p{
+        font-weight:bold;
+        color:#333;
+    }
+
+    .card:hover{
+        transform:scale(1.05) rotate(1deg);
+        box-shadow:0 8px 15px rgba(0,0,0,0.15);
+    }
+    .card:hover img{
+        transform:rotate(-10deg) scale(1.1);
+    }
+</style>
+</head>
+<body>
+<h2>Select a Service</h2>
+<div class="grid">
+    <div class="card"><img src="https://img.icons8.com/color/96/plumbing.png"/><p>Plumbing</p></div>
+    <div class="card"><img src="https://img.icons8.com/color/96/electrician.png"/><p>Electrician</p></div>
+    <div class="card"><img src="https://img.icons8.com/color/96/paint-brush.png"/><p>Painting</p></div>
+    <div class="card"><img src="https://img.icons8.com/color/96/air-conditioner.png"/><p>AC Repair</p></div>
+    <div class="card"><img src="https://img.icons8.com/color/96/carpenter.png"/><p>Carpentry</p></div>
+    <div class="card"><img src="https://img.icons8.com/color/96/cleaning-a-surface.png"/><p>Cleaning</p></div>
+</div>
+</body>
+</html>

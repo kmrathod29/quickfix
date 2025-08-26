@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuickFix - Splash</title>
+<style>
+    * {margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body {
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+        background:linear-gradient(45deg,#006aff,#ee0979);
+        color:#fff;
+    }
+    .logo {
+        font-size:3rem;
+        font-weight:bold;
+        animation:fadeIn 2s ease-in-out;
+    }
+    @keyframes fadeIn {
+        0%{opacity:0;transform:scale(0.5);}
+        100%{opacity:1;transform:scale(1);}
+    }
+    .loader {
+        margin-top:20px;
+        border:6px solid rgba(255,255,255,0.2);
+        border-top:6px solid #fff;
+        border-radius:50%;
+        width:50px;
+        height:50px;
+        animation:spin 1s linear infinite;
+    }
+    @keyframes spin {
+        0%{transform:rotate(0deg);}
+        100%{transform:rotate(360deg);}
+    }
+</style>
+<script>
+    setTimeout(() => {
+        window.location.href = "welcome.html";
+    }, 3000);
+</script>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">QuickFix</div>
+        <div class="loader"></div>
+    </div>
+</body>
+</html>

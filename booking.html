@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuickFix - Book Service</title>
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body{
+        background:#f4f6f9;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+        padding:20px;
+    }
+    .booking-card{
+        background:#fff;
+        border-radius:15px;
+        box-shadow:0 6px 15px rgba(0,0,0,0.1);
+        width:360px;
+        padding:25px;
+        animation:fadeInUp 1s ease;
+    }
+    @keyframes fadeInUp{
+        from{opacity:0;transform:translateY(50px);}
+        to{opacity:1;transform:translateY(0);}
+    }
+    h2{
+        text-align:center;
+        margin-bottom:15px;
+        color:#333;
+    }
+    label{
+        font-size:14px;
+        color:#444;
+        margin-bottom:5px;
+        display:block;
+    }
+    input, select{
+        width:100%;
+        padding:12px;
+        margin-bottom:15px;
+        border-radius:8px;
+        border:1px solid #ccc;
+        font-size:14px;
+    }
+    .map-placeholder{
+        width:100%;
+        height:150px;
+        background:#e0e0e0;
+        border-radius:8px;
+        margin-bottom:15px;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:#777;
+        font-size:14px;
+    }
+    .cost-box{
+        background:#f8f8f8;
+        padding:10px;
+        border-radius:8px;
+        text-align:center;
+        margin-bottom:15px;
+        font-weight:bold;
+        color:#333;
+    }
+    .btn{
+        width:100%;
+        padding:14px;
+        background:linear-gradient(45deg,#00c6ff,#0072ff);
+        border:none;
+        border-radius:8px;
+        color:#fff;
+        font-size:16px;
+        font-weight:bold;
+        cursor:pointer;
+        transition:.3s;
+        position:relative;
+        overflow:hidden;
+    }
+    .btn::before{
+        content:"";
+        position:absolute;
+        top:0;left:-100%;
+        width:100%;
+        height:100%;
+        background:rgba(255,255,255,0.3);
+        transform:skewX(-45deg);
+        transition:0.5s;
+    }
+    .btn:hover::before{
+        left:100%;
+    }
+    .btn:hover{
+        transform:scale(1.05);
+    }
+</style>
+<script>
+    function confirmBooking(){
+        alert("✅ Your booking is confirmed! Technician will contact you soon.");
+        window.location.href="services.html";
+    }
+</script>
+</head>
+<body>
+<div class="booking-card">
+    <h2>Book Your Service</h2>
+    <label>Select Date</label>
+    <input type="date" required>
+
+    <label>Select Time</label>
+    <input type="time" required>
+
+    <label>Enter Address</label>
+    <input type="text" placeholder="Enter your address" required>
+
+    <div class="map-placeholder">Google Map Preview</div>
+
+    <div class="cost-box">Estimated Cost: ₹500 - ₹1500</div>
+
+    <button class="btn" onclick="confirmBooking()">Confirm Booking</button>
+</div>
+</body>
+</html>
