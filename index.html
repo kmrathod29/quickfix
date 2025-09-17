@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Basic Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>QuickFix - On-Demand Home Services</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #06b6d4;
+            --accent-color: #8b5cf6;
+            --background-color: #ffffff;
+            --text-color: #374151;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --border-radius: 8px;
+            --spacing-unit: 24px;
+            --transition: all 0.3s ease;
+            --gradient-primary: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
+            --gradient-secondary: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        /* Screen containers */
+        .screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            z-index: 9999;
+        }
+
+        .screen.hidden {
+            opacity: 0;
+            transform: translateX(-100%);
+            pointer-events: none;
+        }
+
+        .screen.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: all;
+        }
+
+        /* Splash Screen Styles */
+        #splash {
+            background: linear-gradient(45deg, #006aff, #ee0979);
+            color: #fff;
+        }
+
+        .splash-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: bold;
+            animation: fadeIn 2s ease-in-out;
+            text-align: center;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .loader {
+            margin: 20px auto;
+            border: 6px solid rgba(255, 255, 255, 0.2);
+            border-top: 6px solid #fff;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Welcome Screen Styles */
+        #welcome {
+            background: linear-gradient(-45deg, #ff6a00, #ee0979, #00c6ff, #0072ff);
+            background-size: 400% 400%;
+            animation: gradientBG 8s ease infinite;
+            color: white;
+            text-align: center;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .welcome-container {
+            max-width: 600px;
+            padding: 20px;
+            opacity: 0;
+            animation: slideUp 1s ease forwards;
+            animation-delay: 0.3s;
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(-20px);
+            }
+        }
+
+        #welcome h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .typewriter {
+            font-size: 1.2rem;
+            border-right: 2px solid #fff;
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+            width: 0;
+            animation: typing 4s steps(30, end) forwards, blink .7s infinite;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent
+            }
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            background: #fff;
+            color: #ff6a00;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: .3s;
+            cursor: pointer;
+            border: none;
+            margin-top: 30px;
+            opacity: 0;
+            animation: fadeInBtn 1s ease forwards;
+            animation-delay: 2s;
+        }
+
+        @keyframes fadeInBtn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .btn:hover {
+            background: #ff6a00;
+            color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Main Page Styles - Hidden initially */
+        #mainPage {
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+
+        #mainPage.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header Styles */
+        .navbar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12);
+            padding: 8px 0;
+        }
+
+        .navbar-brand {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.75rem;
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.02);
+            filter: brightness(1.1);
+        }
+
+        .navbar-nav {
+            align-items: center;
+        }
+
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            color: var(--text-color) !important;
+            margin: 0 2px;
+            padding: 8px 16px !important;
+            border-radius: 50px;
+            transition: var(--transition);
+            position: relative;
+            font-size: 15px;
+            white-space: nowrap;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--primary-color) !important;
+            background: rgba(37, 99, 235, 0.08);
+            transform: translateY(-1px);
+        }
+
+        .navbar-nav .nav-link.active {
+            color: var(--primary-color) !important;
+            background: rgba(37, 99, 235, 0.1);
+            font-weight: 600;
+        }
+
+        /* Hero Section Styles */
+        .hero-section {
+            background: var(--background-color);
+            position: relative;
+            padding: 120px 0 80px;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="25" cy="25" r="1" fill="%232563eb" opacity="0.05"/><circle cx="75" cy="75" r="1" fill="%2306b6d4" opacity="0.05"/><circle cx="25" cy="75" r="1" fill="%238b5cf6" opacity="0.05"/><circle cx="75" cy="25" r="1" fill="%232563eb" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.6;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: var(--text-color);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 24px;
+            line-height: 1.2;
+            color: var(--text-color);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            font-weight: 400;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--text-color);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+            justify-content: center;
+        }
+
+        .hero-btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            border: 2px solid transparent;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(37, 99, 235, 0.3);
+            color: white;
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        .floating-element:nth-child(4) {
+            width: 40px;
+            height: 40px;
+            top: 30%;
+            right: 25%;
+            animation-delay: 1s;
+            background: rgba(6, 182, 212, 0.2);
+        }
+
+        .floating-element:nth-child(5) {
+            width: 70px;
+            height: 70px;
+            bottom: 40%;
+            right: 10%;
+            animation-delay: 3s;
+            background: rgba(139, 92, 246, 0.2);
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            25% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+
+            50% {
+                transform: translateY(-40px) rotate(0deg);
+            }
+
+            75% {
+                transform: translateY(-20px) rotate(-5deg);
+            }
+        }
+
+        .tech-highlight {
+            font-weight: 700;
+            color: var(--warning-color);
+        }
+
+        .glow-effect:hover {
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+        }
+
+        /* Services Section Styles */
+        .services-section {
+            padding: 80px 0;
+            background: #f7f8fa;
+            position: relative;
+        }
+
+        .services-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+
+        .services-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            opacity: 0.8;
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 1;
+        }
+
+        .service-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .service-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 10px;
+        }
+
+        .service-description {
+            font-size: 0.95rem;
+            color: var(--text-color);
+            opacity: 0.7;
+            line-height: 1.5;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+
+            .logo,
+            #welcome h1 {
+                font-size: 2.5rem;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            .typewriter {
+                font-size: 1rem;
+            }
+
+            .hero-section {
+                padding: 100px 0 60px;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 20px;
+            }
+
+            .service-card {
+                padding: 20px 15px;
+            }
+
+            .service-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .navbar-nav {
+                text-align: center;
+                padding: 20px 0 0 0;
+            }
+
+            .navbar-nav .nav-link {
+                margin: 4px 0;
+                padding: 12px 20px !important;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-btn-primary {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+        }
+
+        /* Ripple Effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Splash Screen -->
+    <div id="splash" class="screen active">
+        <div class="splash-container">
+            <div class="logo">QuickFix</div>
+            <div class="loader"></div>
+        </div>
+    </div>
+
+    <!-- Welcome Screen -->
+    <div id="welcome" class="screen hidden">
+        <div class="welcome-container">
+            <h1>QuickFix</h1>
+            <p class="tagline">On-Demand Home Repair Services</p>
+            <p class="typewriter">Your Home, Our Priority!</p>
+            <br>
+            <button class="btn" onclick="showMainPage()">Get Started</button>
+        </div>
+    </div>
+
+    <!-- Main Page -->
+    <div id="mainPage">
+        <!-- Header Section -->
+        <nav class="navbar navbar-expand-lg fixed-top" id="mainNavbar">
+            <div class="container">
+                <!-- Logo -->
+                <a class="navbar-brand" href="#" data-aos="fade-right">
+                    <i class="fas fa-tools" style="font-size: 45px; color: var(--secondary-color);"></i>
+                    QuickFix
+                </a>
+
+                <!-- Mobile Toggle Button -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Navigation Menu -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto" data-aos="fade-down" data-aos-delay="100">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#services">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">Contact Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#login">Sign in</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero-section" id="home">
+            <div class="floating-elements">
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+            </div>
+
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <div class="hero-content">
+                            <h1 class="hero-title" data-aos="fade-up" data-aos-delay="400">
+                                QuickFix <span class="tech-highlight">On-Demand Home Repair Services</span>
+                            </h1>
+
+                            <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="500">
+                                Plumbers, Electricians, Carpenters & more at your doorstep within minutes
+                            </p>
+
+                            <div class="hero-buttons" data-aos="fade-up" data-aos-delay="600">
+                                <a href="#services" class="hero-btn-primary glow-effect">
+                                    <i class="fas fa-rocket"></i>
+                                    Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="services-section" id="services">
+            <div class="container">
+                <h2 class="services-title" data-aos="fade-up">Our Services</h2>
+                <p class="services-subtitle" data-aos="fade-up" data-aos-delay="100">
+                    Professional home services delivered right to your doorstep
+                </p>
+
+                <div class="services-grid" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card" onclick="selectService('Plumbing')">
+                        <img class="service-icon" src="https://img.icons8.com/color/96/plumbing.png" alt="Plumbing" />
+                        <h3 class="service-title">Plumbing</h3>
+                        <p class="service-description">Expert plumbers for all your water and pipe related issues</p>
+                    </div>
+
+                    <div class="service-card" onclick="selectService('Electrician')">
+                        <img class="service-icon" src="https://img.icons8.com/color/96/electrician.png"
+                            alt="Electrician" />
+                        <h3 class="service-title">Electrician</h3>
+                        <p class="service-description">Licensed electricians for safe and reliable electrical work</p>
+                    </div>
+
+                    <div class="service-card" onclick="selectService('Painting')">
+                        <img class="service-icon" src="https://img.icons8.com/color/96/paint-brush.png"
+                            alt="Painting" />
+                        <h3 class="service-title">Painting</h3>
+                        <p class="service-description">Transform your space with professional painting services</p>
+                    </div>
+
+                    <div class="service-card" onclick="selectService('AC Repair')">
+                        <img class="service-icon" src="https://img.icons8.com/color/96/air-conditioner.png"
+                            alt="AC Repair" />
+                        <h3 class="service-title">AC Repair</h3>
+                        <p class="service-description">Keep your home cool with expert AC maintenance and repair</p>
+                    </div>
+
+                    <div class="service-card" onclick="selectService('Carpentry')">
+                        <img class="service-icon" src="https://img.icons8.com/color/96/carpenter.png" alt="Carpentry" />
+                        <h3 class="service-title">Carpentry</h3>
+                        <p class="service-description">Custom woodwork and furniture solutions for your home</p>
+                    </div>
+
+                    <div class="service-card" onclick="selectService('Cleaning')">
+                        <img class="service-icon" src="https://img.icons8.com/color/96/cleaning-a-surface.png"
+                            alt="Cleaning" />
+                        <h3 class="service-title">Cleaning</h3>
+                        <p class="service-description">Professional cleaning services for a spotless home</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Screen navigation state
+        let currentScreen = 'splash';
+
+        // Transition from splash to welcome after 3 seconds
+        setTimeout(() => {
+            showWelcome();
+        }, 3000);
+
+        // Show welcome screen
+        function showWelcome() {
+            document.getElementById('splash').classList.remove('active');
+            document.getElementById('splash').classList.add('hidden');
+            document.getElementById('welcome').classList.remove('hidden');
+            document.getElementById('welcome').classList.add('active');
+            currentScreen = 'welcome';
+
+            // Reset animations for welcome screen
+            const welcomeContainer = document.querySelector('.welcome-container');
+            welcomeContainer.style.animation = 'none';
+            setTimeout(() => {
+                welcomeContainer.style.animation = 'slideUp 1s ease forwards';
+            }, 100);
+        }
+
+        // Show main page
+        function showMainPage() {
+            document.getElementById('welcome').classList.remove('active');
+            document.getElementById('welcome').classList.add('hidden');
+
+            // Show main page after a brief delay
+            setTimeout(() => {
+                document.getElementById('mainPage').classList.add('show');
+                currentScreen = 'main';
+
+                // Initialize AOS animations
+                AOS.init({
+                    duration: 800,
+                    easing: 'ease-in-out',
+                    once: true,
+                    offset: 100
+                });
+            }, 300);
+        }
+
+        // Handle service selection
+        function selectService(serviceName) {
+            const card = event.currentTarget;
+
+            // Add ripple effect
+            createRipple(event);
+
+            // Scale animation
+            card.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                card.style.transform = '';
+                alert(`You selected ${serviceName} service. This would typically navigate to the booking page for ${serviceName}.`);
+            }, 200);
+        }
+
+        // Add ripple effect to service cards
+        function createRipple(event) {
+            const card = event.currentTarget;
+            const circle = document.createElement('span');
+            const diameter = Math.max(card.clientWidth, card.clientHeight);
+            const radius = diameter / 2;
+
+            circle.style.width = circle.style.height = `${diameter}px`;
+            circle.style.left = `${event.clientX - card.offsetLeft - radius}px`;
+            circle.style.top = `${event.clientY - card.offsetTop - radius}px`;
+            circle.classList.add('ripple');
+
+            const ripple = card.getElementsByClassName('ripple')[0];
+            if (ripple) {
+                ripple.remove();
+            }
+
+            card.appendChild(circle);
+        }
+
+        // Apply ripple effect to buttons and cards
+        document.querySelectorAll('.hero-btn-primary, .service-card').forEach(element => {
+            element.style.position = 'relative';
+            element.style.overflow = 'hidden';
+        });
+
+        // Navbar scroll effect (only when main page is visible)
+        window.addEventListener('scroll', function () {
+            if (currentScreen === 'main') {
+                const navbar = document.getElementById('mainNavbar');
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
