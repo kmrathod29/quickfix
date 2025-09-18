@@ -184,7 +184,7 @@
         
         .btn {
             display: inline-block;
-            padding: 14px 30px;
+            padding: 10px 25px;
             background: #fff;
             color: #ff6a00;
             font-weight: bold;
@@ -194,7 +194,7 @@
             transition: .3s;
             cursor: pointer;
             border: none;
-            margin-top: 30px;
+            margin-top: 3px;
             opacity: 0;
             animation: fadeInBtn 1s ease forwards;
             animation-delay: 2s;
@@ -233,7 +233,7 @@
             backdrop-filter: blur(20px);
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
             transition: var(--transition);
-            padding: 12px 0;
+            padding: 18px 0;
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
@@ -545,10 +545,10 @@
         }
 
         .service-icon {
-            width: 80px;
-            height: 80px;
+            font-size: 80px;
             margin: 0 auto 20px;
             transition: var(--transition);
+            display: block;
         }
 
         .service-card:hover .service-icon {
@@ -696,10 +696,27 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#contact">Contact Us</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#login">Sign in</a>
-                        </li>
                     </ul>
+                    
+                    <!-- Navbar Actions -->
+                    <div class="navbar-actions d-flex flex-row align-items-center" data-aos="fade-left" data-aos-delay="200">
+                        <!-- Language Selector -->
+                        <div class="dropdown me-2">
+                            <button class="btn btn-outline-secondary dropdown-toggle language-btn" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-globe me-2"></i>EN
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                                <li><a class="dropdown-item" href="#" onclick="changeLanguage('en')"><i class="flag flag-us me-2"></i>English</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="changeLanguage('hi')"><i class="flag flag-in me-2"></i>हिंदी</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="changeLanguage('es')"><i class="flag flag-es me-2"></i>Español</a></li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Sign In Button -->
+                        <a href="#login" class="btn btn-primary sign-in-btn">
+                            <i class="fas fa-user me-2"></i>Sign In
+                        </a>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -728,7 +745,7 @@
 
                             <div class="hero-buttons" data-aos="fade-up" data-aos-delay="600">
                                 <a href="#services" class="hero-btn-primary glow-effect">
-                                    <i class="fas fa-rocket"></i>
+                                    <i class="fas fa-calendar-check"></i>
                                     Book Now</a>
                             </div>
                         </div>
@@ -747,37 +764,37 @@
                 
                 <div class="services-grid" data-aos="fade-up" data-aos-delay="200">
                     <div class="service-card" onclick="selectService('Plumbing')">
-                        <img class="service-icon" src="https://img.icons8.com/color/96/plumbing.png" alt="Plumbing" />
+                        <i class="fas fa-wrench service-icon" style="color: #3b82f6;"></i>
                         <h3 class="service-title">Plumbing</h3>
                         <p class="service-description">Expert plumbers for all your water and pipe related issues</p>
                     </div>
                     
                     <div class="service-card" onclick="selectService('Electrician')">
-                        <img class="service-icon" src="https://img.icons8.com/color/96/electrician.png" alt="Electrician" />
+                        <i class="fas fa-bolt service-icon" style="color: #eab308;"></i>
                         <h3 class="service-title">Electrician</h3>
                         <p class="service-description">Licensed electricians for safe and reliable electrical work</p>
                     </div>
                     
                     <div class="service-card" onclick="selectService('Painting')">
-                        <img class="service-icon" src="https://img.icons8.com/color/96/paint-brush.png" alt="Painting" />
+                        <i class="fas fa-paint-roller service-icon" style="color: #10b981;"></i>
                         <h3 class="service-title">Painting</h3>
                         <p class="service-description">Transform your space with professional painting services</p>
                     </div>
                     
                     <div class="service-card" onclick="selectService('AC Repair')">
-                        <img class="service-icon" src="https://img.icons8.com/color/96/air-conditioner.png" alt="AC Repair" />
+                        <i class="fas fa-snowflake service-icon" style="color: #06b6d4;"></i>
                         <h3 class="service-title">AC Repair</h3>
                         <p class="service-description">Keep your home cool with expert AC maintenance and repair</p>
                     </div>
                     
                     <div class="service-card" onclick="selectService('Carpentry')">
-                        <img class="service-icon" src="https://img.icons8.com/color/96/carpenter.png" alt="Carpentry" />
+                        <i class="fas fa-hammer service-icon" style="color: #a855f7;"></i>
                         <h3 class="service-title">Carpentry</h3>
                         <p class="service-description">Custom woodwork and furniture solutions for your home</p>
                     </div>
                     
                     <div class="service-card" onclick="selectService('Cleaning')">
-                        <img class="service-icon" src="https://img.icons8.com/color/96/cleaning-a-surface.png" alt="Cleaning" />
+                        <i class="fas fa-broom service-icon" style="color: #f59e0b;"></i>
                         <h3 class="service-title">Cleaning</h3>
                         <p class="service-description">Professional cleaning services for a spotless home</p>
                     </div>
@@ -973,6 +990,22 @@
                 // Could add logic to show welcome screen again
             }
         });
+
+        // Handle language change
+        function changeLanguage(lang) {
+            const languageBtn = document.getElementById('languageDropdown');
+            const languages = {
+                'en': { code: 'EN', name: 'English' },
+                'hi': { code: 'HI', name: 'हिंदी' },
+                'es': { code: 'ES', name: 'Español' }
+            };
+            
+            if (languages[lang]) {
+                languageBtn.innerHTML = `<i class="fas fa-globe me-2"></i>${languages[lang].code}`;
+                console.log(`Language changed to: ${languages[lang].name}`);
+                // Here you would typically implement actual language switching logic
+            }
+        }
 
         // Initialize all features when DOM is fully loaded
         document.addEventListener('DOMContentLoaded', function () {
