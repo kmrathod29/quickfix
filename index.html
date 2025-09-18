@@ -9,10 +9,9 @@
     <title>QuickFix - On-Demand Home Services</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
-
+    
     <style>
         :root {
             --primary-color: #2563eb;
@@ -43,12 +42,7 @@
             overflow-x: hidden;
         }
 
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
+        h1, h2, h3, h4, h5, h6 {
             font-family: 'Poppins', sans-serif;
             font-weight: 600;
         }
@@ -66,51 +60,50 @@
             transition: opacity 0.8s ease, transform 0.8s ease;
             z-index: 9999;
         }
-
+        
         .screen.hidden {
             opacity: 0;
             transform: translateX(-100%);
             pointer-events: none;
         }
-
+        
         .screen.active {
             opacity: 1;
             transform: translateX(0);
             pointer-events: all;
         }
-
+        
         /* Splash Screen Styles */
         #splash {
             background: linear-gradient(45deg, #006aff, #ee0979);
             color: #fff;
         }
-
+        
         .splash-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
-
+        
         .logo {
             font-size: 3rem;
             font-weight: bold;
             animation: fadeIn 2s ease-in-out;
             text-align: center;
         }
-
+        
         @keyframes fadeIn {
             0% {
                 opacity: 0;
                 transform: scale(0.5);
             }
-
             100% {
                 opacity: 1;
                 transform: scale(1);
             }
         }
-
+        
         .loader {
             margin: 20px auto;
             border: 6px solid rgba(255, 255, 255, 0.2);
@@ -120,17 +113,12 @@
             height: 50px;
             animation: spin 1s linear infinite;
         }
-
+        
         @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-
+        
         /* Welcome Screen Styles */
         #welcome {
             background: linear-gradient(-45deg, #ff6a00, #ee0979, #00c6ff, #0072ff);
@@ -139,21 +127,13 @@
             color: white;
             text-align: center;
         }
-
+        
         @keyframes gradientBG {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-
+        
         .welcome-container {
             max-width: 600px;
             padding: 20px;
@@ -161,27 +141,27 @@
             animation: slideUp 1s ease forwards;
             animation-delay: 0.3s;
         }
-
+        
         @keyframes slideUp {
             to {
                 opacity: 1;
                 transform: translateY(-20px);
             }
         }
-
+        
         #welcome h1 {
             font-size: 3rem;
             font-weight: bold;
             text-transform: uppercase;
             margin-bottom: 10px;
         }
-
+        
         .tagline {
             font-size: 1.5rem;
             font-weight: 300;
             margin-bottom: 20px;
         }
-
+        
         .typewriter {
             font-size: 1.2rem;
             border-right: 2px solid #fff;
@@ -192,23 +172,16 @@
             animation: typing 4s steps(30, end) forwards, blink .7s infinite;
             animation-delay: 0.5s;
         }
-
+        
         @keyframes typing {
-            from {
-                width: 0
-            }
-
-            to {
-                width: 100%
-            }
+            from { width: 0 }
+            to { width: 100% }
         }
-
+        
         @keyframes blink {
-            50% {
-                border-color: transparent
-            }
+            50% { border-color: transparent }
         }
-
+        
         .btn {
             display: inline-block;
             padding: 14px 30px;
@@ -226,13 +199,13 @@
             animation: fadeInBtn 1s ease forwards;
             animation-delay: 2s;
         }
-
+        
         @keyframes fadeInBtn {
             to {
                 opacity: 1;
             }
         }
-
+        
         .btn:hover {
             background: #ff6a00;
             color: #fff;
@@ -274,10 +247,6 @@
             font-family: 'Poppins', sans-serif;
             font-weight: 700;
             font-size: 1.75rem;
-            background: var(--gradient-secondary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
             text-decoration: none;
             transition: var(--transition);
             display: flex;
@@ -287,7 +256,28 @@
 
         .navbar-brand:hover {
             transform: scale(1.02);
+        }
+
+        .navbar-brand .brand-text {
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .navbar-brand:hover .brand-text {
             filter: brightness(1.1);
+        }
+
+        .navbar-brand i {
+            color: var(--secondary-color) !important;
+            transition: var(--transition);
+            -webkit-text-fill-color: var(--secondary-color) !important;
+        }
+
+        .navbar-brand:hover i {
+            color: var(--primary-color) !important;
+            -webkit-text-fill-color: var(--primary-color) !important;
         }
 
         .navbar-nav {
@@ -457,20 +447,15 @@
         }
 
         @keyframes float {
-
-            0%,
-            100% {
+            0%, 100% {
                 transform: translateY(0px) rotate(0deg);
             }
-
             25% {
                 transform: translateY(-20px) rotate(5deg);
             }
-
             50% {
                 transform: translateY(-40px) rotate(0deg);
             }
-
             75% {
                 transform: translateY(-20px) rotate(-5deg);
             }
@@ -586,16 +571,14 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
-
-            .logo,
-            #welcome h1 {
+            .logo, #welcome h1 {
                 font-size: 2.5rem;
             }
-
+            
             .tagline {
                 font-size: 1.2rem;
             }
-
+            
             .typewriter {
                 font-size: 1rem;
             }
@@ -651,7 +634,7 @@
             animation: ripple-animation 0.6s linear;
             pointer-events: none;
         }
-
+        
         @keyframes ripple-animation {
             to {
                 transform: scale(4);
@@ -669,7 +652,7 @@
             <div class="loader"></div>
         </div>
     </div>
-
+    
     <!-- Welcome Screen -->
     <div id="welcome" class="screen hidden">
         <div class="welcome-container">
@@ -688,8 +671,8 @@
             <div class="container">
                 <!-- Logo -->
                 <a class="navbar-brand" href="#" data-aos="fade-right">
-                    <i class="fas fa-tools" style="font-size: 45px; color: var(--secondary-color);"></i>
-                    QuickFix
+                    <i class="fas fa-tools" style="font-size: 45px;"></i>
+                    <span class="brand-text">QuickFix</span>
                 </a>
 
                 <!-- Mobile Toggle Button -->
@@ -736,11 +719,11 @@
                     <div class="col-12">
                         <div class="hero-content">
                             <h1 class="hero-title" data-aos="fade-up" data-aos-delay="400">
-                                QuickFix <span class="tech-highlight">On-Demand Home Repair Services</span>
+                               QuickFix <span class="tech-highlight">On-Demand Home Repair Services</span>
                             </h1>
 
                             <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="500">
-                                Plumbers, Electricians, Carpenters & more at your doorstep within minutes
+                               Plumbers, Electricians, Carpenters & more at your doorstep within minutes
                             </p>
 
                             <div class="hero-buttons" data-aos="fade-up" data-aos-delay="600">
@@ -761,44 +744,40 @@
                 <p class="services-subtitle" data-aos="fade-up" data-aos-delay="100">
                     Professional home services delivered right to your doorstep
                 </p>
-
+                
                 <div class="services-grid" data-aos="fade-up" data-aos-delay="200">
                     <div class="service-card" onclick="selectService('Plumbing')">
                         <img class="service-icon" src="https://img.icons8.com/color/96/plumbing.png" alt="Plumbing" />
                         <h3 class="service-title">Plumbing</h3>
                         <p class="service-description">Expert plumbers for all your water and pipe related issues</p>
                     </div>
-
+                    
                     <div class="service-card" onclick="selectService('Electrician')">
-                        <img class="service-icon" src="https://img.icons8.com/color/96/electrician.png"
-                            alt="Electrician" />
+                        <img class="service-icon" src="https://img.icons8.com/color/96/electrician.png" alt="Electrician" />
                         <h3 class="service-title">Electrician</h3>
                         <p class="service-description">Licensed electricians for safe and reliable electrical work</p>
                     </div>
-
+                    
                     <div class="service-card" onclick="selectService('Painting')">
-                        <img class="service-icon" src="https://img.icons8.com/color/96/paint-brush.png"
-                            alt="Painting" />
+                        <img class="service-icon" src="https://img.icons8.com/color/96/paint-brush.png" alt="Painting" />
                         <h3 class="service-title">Painting</h3>
                         <p class="service-description">Transform your space with professional painting services</p>
                     </div>
-
+                    
                     <div class="service-card" onclick="selectService('AC Repair')">
-                        <img class="service-icon" src="https://img.icons8.com/color/96/air-conditioner.png"
-                            alt="AC Repair" />
+                        <img class="service-icon" src="https://img.icons8.com/color/96/air-conditioner.png" alt="AC Repair" />
                         <h3 class="service-title">AC Repair</h3>
                         <p class="service-description">Keep your home cool with expert AC maintenance and repair</p>
                     </div>
-
+                    
                     <div class="service-card" onclick="selectService('Carpentry')">
                         <img class="service-icon" src="https://img.icons8.com/color/96/carpenter.png" alt="Carpentry" />
                         <h3 class="service-title">Carpentry</h3>
                         <p class="service-description">Custom woodwork and furniture solutions for your home</p>
                     </div>
-
+                    
                     <div class="service-card" onclick="selectService('Cleaning')">
-                        <img class="service-icon" src="https://img.icons8.com/color/96/cleaning-a-surface.png"
-                            alt="Cleaning" />
+                        <img class="service-icon" src="https://img.icons8.com/color/96/cleaning-a-surface.png" alt="Cleaning" />
                         <h3 class="service-title">Cleaning</h3>
                         <p class="service-description">Professional cleaning services for a spotless home</p>
                     </div>
@@ -812,12 +791,28 @@
     <script>
         // Screen navigation state
         let currentScreen = 'splash';
-
-        // Transition from splash to welcome after 3 seconds
-        setTimeout(() => {
-            showWelcome();
-        }, 3000);
-
+        
+        // Check if this is the first visit
+        const isFirstVisit = !localStorage.getItem('quickfix-visited');
+        
+        if (isFirstVisit) {
+            // First visit - show splash and welcome screens
+            localStorage.setItem('quickfix-visited', 'true');
+            
+            // Transition from splash to welcome after 3 seconds
+            setTimeout(() => {
+                showWelcome();
+            }, 3000);
+        } else {
+            // Returning visitor - go directly to main page
+            document.getElementById('splash').classList.remove('active');
+            document.getElementById('splash').classList.add('hidden');
+            document.getElementById('welcome').classList.remove('active');
+            document.getElementById('welcome').classList.add('hidden');
+            
+            showMainPage();
+        }
+        
         // Show welcome screen
         function showWelcome() {
             document.getElementById('splash').classList.remove('active');
@@ -825,7 +820,7 @@
             document.getElementById('welcome').classList.remove('hidden');
             document.getElementById('welcome').classList.add('active');
             currentScreen = 'welcome';
-
+            
             // Reset animations for welcome screen
             const welcomeContainer = document.querySelector('.welcome-container');
             welcomeContainer.style.animation = 'none';
@@ -833,17 +828,17 @@
                 welcomeContainer.style.animation = 'slideUp 1s ease forwards';
             }, 100);
         }
-
+        
         // Show main page
         function showMainPage() {
             document.getElementById('welcome').classList.remove('active');
             document.getElementById('welcome').classList.add('hidden');
-
+            
             // Show main page after a brief delay
             setTimeout(() => {
                 document.getElementById('mainPage').classList.add('show');
                 currentScreen = 'main';
-
+                
                 // Initialize AOS animations
                 AOS.init({
                     duration: 800,
@@ -857,10 +852,10 @@
         // Handle service selection
         function selectService(serviceName) {
             const card = event.currentTarget;
-
+            
             // Add ripple effect
             createRipple(event);
-
+            
             // Scale animation
             card.style.transform = 'scale(0.95)';
             setTimeout(() => {
@@ -910,17 +905,86 @@
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                if (currentScreen === 'main') {
+                    const href = this.getAttribute('href');
+                    if (href && href !== '#') {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
                 }
             });
         });
+
+        // Parallax effect for floating elements
+        window.addEventListener('scroll', function () {
+            if (currentScreen === 'main') {
+                const scrolled = window.pageYOffset;
+                const parallaxElements = document.querySelectorAll('.floating-element');
+
+                parallaxElements.forEach((element, index) => {
+                    const speed = 0.5 + (index * 0.2);
+                    element.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
+                });
+            }
+        });
+
+        // Dynamic logo animation
+        const brandLogo = document.querySelector('.navbar-brand i');
+        if (brandLogo) {
+            brandLogo.addEventListener('mouseenter', function () {
+                this.style.transform = 'rotate(360deg) scale(1.1)';
+            });
+
+            brandLogo.addEventListener('mouseleave', function () {
+                this.style.transform = 'rotate(0deg) scale(1)';
+            });
+        }
+
+        // Mobile menu animation
+        const navbarToggler = document.querySelector('.navbar-toggler');
+        const navbarCollapse = document.querySelector('.navbar-collapse');
+
+        if (navbarToggler && navbarCollapse) {
+            navbarToggler.addEventListener('click', function () {
+                setTimeout(() => {
+                    if (navbarCollapse.classList.contains('show')) {
+                        navbarCollapse.style.animation = 'slideDown 0.3s ease-out';
+                    }
+                }, 10);
+            });
+        }
+
+        // Handle browser back button
+        window.addEventListener('popstate', (event) => {
+            if (currentScreen === 'main') {
+                // Could add logic to go back to welcome screen
+            }
+        });
+        
+        // Add keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && currentScreen === 'main') {
+                // Could add logic to show welcome screen again
+            }
+        });
+
+        // Initialize all features when DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('QuickFix - Complete App Loaded Successfully!');
+        });
+
+        // Error handling for external resources
+        window.addEventListener('error', function (e) {
+            if (e.target.tagName === 'SCRIPT' || e.target.tagName === 'LINK') {
+                console.warn('Failed to load external resource:', e.target.src || e.target.href);
+            }
+        });
     </script>
 </body>
-
 </html>
