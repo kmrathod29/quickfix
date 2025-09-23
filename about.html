@@ -1,40 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - Quick Fix</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-
- <!-- <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-   -->
-     <link rel="stylesheet" href="about.css">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="about.css">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="bg-gray-50">
     <!-- Navbar -->
-       <nav class="navbar">
+    <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
                 <h2>QuickFix</h2>
             </div>
             <ul class="nav-menu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="servise.html" class="nav-link">Services</a></li>
-                <li><a href="about.html" class="nav-link">about us</a></li>
-                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
-                <li class="nav-dropdown">
-                    <select class="language-selector">
-                        <option value="en">🇺🇸 English</option>
-                        <option value="es">🇪🇸 Español</option>
-                        <option value="fr">🇫🇷 Français</option>
-                        <option value="de">🇩🇪 Deutsch</option>
-                    </select>
-                </li>
-                <li><a href="login.html"><button class="nav-auth-btn login-btn">Login</button></a></li>
-                <!-- <li><button class="nav-auth-btn signup-btn" onclick="openSignupModal()">Sign Up</button></li> -->
+                <li><a href="service.html" class="nav-link">Services</a></li>
+                <li><a href="about.html" class="nav-link">About us</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
+            <div class="nav-menu-right">
+                <div class="language-selector-container">
+                    <div class="language-selector">
+                        <span class="current-language" data-lang="en">
+                            <i class="fas fa-globe me-2"></i>
+                            EN
+                        </span>
+                        <div class="language-dropdown">
+                            <div class="language-option" data-lang="en">English</div>
+                            <div class="language-option" data-lang="hi">हिंदी</div>
+                            <div class="language-option" data-lang="es">Español</div>
+                        </div>
+                    </div>
+                </div>
+                 <button class="nav-auth-btn login-btn flex items-center gap-2 px-4 py-2"
+                        onclick="openRoleSelectModal('login')">
+                        Login
+                        <i class="ri-login-box-line text-xl"></i> 
+                    </button>
+            </div>
             <div class="hamburger">
                 <span></span>
                 <span></span>
@@ -46,11 +60,11 @@
     <!-- Header -->
     <section id="home" class="hero">
         <div class="container">
-            <h1>About <span class="highlight">QuickFix Solutions</span></h1>
-            <p>We're revolutionizing how businesses solve their most complex challenges through innovative technology solutions, expert consultation, and unwavering commitment to excellence.</p>
+            <h1>About <span class="highlight">QuickFix</span></h1>
+            <p>QuickFix connects you with verified professionals for plumbing, electrical, AC repair, painting, and more – anytime, anywhere.</p>
             <div class="hero-buttons">
                 <a href="#how-it-works" class="btn-primary" onclick="scrollToSection('how-it-works')">
-                    Learn More  <i data-lucide="lightbulb" class="icon-blue"></i>
+                    Learn More <i data-lucide="lightbulb" class="icon-blue"></i>
                 </a>
                 <a href="#contact" class="btn-secondary" onclick="scrollToSection('contact')">Contact Us</a>
             </div>
@@ -62,35 +76,35 @@
         <div class="container">
             <div class="section-title">
                 <h2>How It Works</h2>
-                <p>Our streamlined process ensures you get the best solutions with maximum efficiency</p>
+                <p>Our simple 3-step process ensures quick and reliable service:</p>
             </div>
             <div class="steps">
                 <div class="step">
                     <div class="step-icon blue">
                         <i data-lucide="lightbulb" class="icon-blue"></i>
                     </div>
-                    <h3>1. Consultation</h3>
-                    <p>We start with a comprehensive consultation to understand your unique challenges and requirements, ensuring we deliver exactly what you need.</p>
+                    <h3>Book</h3>
+                    <p>Select the service you need in just a few taps.</p>
                 </div>
                 <div class="step">
                     <div class="step-icon green">
                         <i data-lucide="rocket" class="icon-green"></i>
                     </div>
-                    <h3>2. Implementation</h3>
-                    <p>Our expert team implements cutting-edge solutions using the latest technologies and industry best practices for optimal results.</p>
+                    <h3>Connect</h3>
+                    <p>We match you with a nearby verified technician.</p>
                 </div>
                 <div class="step">
                     <div class="step-icon orange">
                         <i data-lucide="shield" class="icon-orange"></i>
                     </div>
-                    <h3>3. Support</h3>
-                    <p>We provide ongoing support and maintenance to ensure your solutions continue to perform at their peak long after implementation.</p>
+                    <h3>Relax</h3>
+                    <p>Sit back while your issue is fixed with guaranteed quality.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    
+
 
     <!-- Vision, Mission, Goals Section -->
     <section class="py-20 bg-white">
@@ -105,21 +119,21 @@
                 <div class="vision-card rounded-2xl p-8 text-white text-center">
                     <div class="text-6xl mb-6">🔮</div>
                     <h3 class="text-2xl font-bold mb-4">Our Vision</h3>
-                    <p class="opacity-90">To become the leading platform connecting homeowners with trusted professionals, making home maintenance effortless and reliable for everyone.</p>
+                    <p class="opacity-90">To make home maintenance effortless, reliable, and accessible for everyone.</p>
                 </div>
 
                 <!-- Mission -->
                 <div class="mission-card rounded-2xl p-8 text-white text-center">
                     <div class="text-6xl mb-6">🎯</div>
                     <h3 class="text-2xl font-bold mb-4">Our Mission</h3>
-                    <p class="opacity-90">Empowering skilled technicians and providing homeowners with quick, reliable, and affordable solutions for all their home service needs.</p>
+                    <p class="opacity-90">Empowering skilled technicians while providing homeowners with affordable, quick, and trustworthy services.</p>
                 </div>
 
                 <!-- Goals -->
                 <div class="goal-card rounded-2xl p-8 text-white text-center">
                     <div class="text-6xl mb-6">🚀</div>
                     <h3 class="text-2xl font-bold mb-4">Our Goals</h3>
-                    <p class="opacity-90">Expand to 100+ cities, maintain 99% customer satisfaction, and create sustainable livelihoods for 10,000+ skilled professionals.</p>
+                    <p class="opacity-90">Expand to 100+ cities, ensure 99% customer satisfaction, and support 10,000+ skilled professionals.</p>
                 </div>
             </div>
         </div>
@@ -130,7 +144,8 @@
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Why Choose Quick Fix?</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">We're committed to providing the best service experience</p>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">We're committed to providing the best service
+                    experience</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -138,7 +153,8 @@
                 <div class="feature-card bg-white rounded-2xl p-8 text-center">
                     <div class="text-5xl mb-4">🛡️</div>
                     <h3 class="text-xl font-bold text-gray-800 mb-3">Verified Professionals</h3>
-                    <p class="text-gray-600">All technicians are background-checked, certified, and insured for your peace of mind</p>
+                    <p class="text-gray-600">All technicians are background-checked, certified, and insured for your
+                        peace of mind</p>
                 </div>
 
                 <!-- Feature 2 -->
@@ -173,56 +189,56 @@
                 <div class="feature-card bg-white rounded-2xl p-8 text-center">
                     <div class="text-5xl mb-4">📱</div>
                     <h3 class="text-xl font-bold text-gray-800 mb-3">Easy Booking</h3>
-                    <p class="text-gray-600">User-friendly platform with simple booking process and real-time tracking</p>
+                    <p class="text-gray-600">User-friendly platform with simple booking process and real-time tracking
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Team Section -->
-   <!-- About Section -->
+    <!-- About Section -->
     <section id="about" class="section about-section">
         <div class="container">
             <div class="about-content">
                 <div class="about-text">
                     <h2>Why Choose QuickFix Solutions?</h2>
-                    <p>Founded in 2015, we've grown from a small startup to a trusted partner for hundreds of businesses worldwide. Our team of experts brings decades of combined experience in technology, strategy, and business transformation.</p>
+                    <p>Founded in 2025, QuickFix has grown from a small local service provider into a trusted partner for thousands of households. Our team of skilled professionals brings years of hands-on experience in plumbing, electrical, carpentry, appliance repair, and more — ensuring reliable, fast, and affordable solutions for every home.</p>
                     <div class="features">
                         <div class="feature">
                             <i data-lucide="award" class="icon-blue"></i>
                             <div>
-                                <h4>Industry Recognition</h4>
-                                <p>Winner of multiple industry awards for innovation and excellence</p>
+                                <h4>Trusted Service</h4>
+                                <p>Successfully completed 100+ home repairs with a 98% customer satisfaction rate.</p>
                             </div>
                         </div>
                         <div class="feature">
                             <i data-lucide="users" class="icon-green"></i>
                             <div>
                                 <h4>Expert Team</h4>
-                                <p>50+ certified professionals with deep industry expertise</p>
+                                <p>50+ verified technicians with professional training and real-world experience.</p>
                             </div>
                         </div>
                         <div class="feature">
                             <i data-lucide="globe" class="icon-orange"></i>
                             <div>
                                 <h4>Global Reach</h4>
-                                <p>Serving clients across 25+ countries with 24/7 support</p>
+                                <p>Serving customers across 5+ cities with 24/7 emergency support.</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="stats-grid">
                     <div class="stat-card blue">
-                        <div class="stat-number blue">500+</div>
-                        <div class="stat-label">Projects Completed</div>
+                        <div class="stat-number blue">100+</div>
+                        <div class="stat-label">Repairs Completed</div>
                     </div>
                     <div class="stat-card green">
                         <div class="stat-number green">98%</div>
-                        <div class="stat-label">Client Satisfaction</div>
+                        <div class="stat-label">Customer Satisfaction</div>
                     </div>
                     <div class="stat-card orange">
-                        <div class="stat-number orange">8+</div>
-                        <div class="stat-label">Years Experience</div>
+                        <div class="stat-number orange">5+</div>
+                        <div class="stat-label">Cities Covereds</div>
                     </div>
                     <div class="stat-card purple">
                         <div class="stat-number purple">24/7</div>
@@ -238,7 +254,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Get In Touch</h2>
-                <p>Ready to transform your business? Contact us today and let's discuss how we can help you achieve your goals.</p>
+                <p>Need quick and reliable help? Whether it’s a repair, installation, or urgent support, QuickFix is just a call away. Reach out today and let’s solve your problem the easy way.</p>
             </div>
             <div class="contact-content">
                 <div class="contact-form">
@@ -283,16 +299,16 @@
                             <i data-lucide="phone" class="icon-green"></i>
                         </div>
                         <h4>Call Us</h4>
-                        <p>+1 (555) 123-4567</p>
-                        <p>+1 (555) 987-6543</p>
+                        <p>+91 90549 24231</p>
+                        <p>+91 74358 10025</p>
                     </div>
                     <div class="contact-card">
                         <div class="contact-card-icon orange">
                             <i data-lucide="map-pin" class="icon-orange"></i>
                         </div>
                         <h4>Visit Us</h4>
-                        <p>123 Innovation Drive</p>
-                        <p>Tech City, TC 12345</p>
+                        <p>Bhavnagar</p>
+                        <p>Gujarat</p>
                     </div>
                 </div>
             </div>
@@ -306,13 +322,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                 <div>
                     <h3 class="text-2xl font-bold mb-4">Quick Fix</h3>
-                    <p class="text-gray-400 mb-4">Your trusted partner for professional home services</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">📘</a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">🐦</a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">📷</a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">💼</a>
-                    </div>
+                    <p class="text-gray-400 mb-4">Your trusted partner for professional Home Services</p>
                 </div>
 
                 <div>
@@ -325,50 +335,218 @@
                     </ul>
                 </div>
 
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Company</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Press</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
-                    </ul>
-                </div>
+<div>
+                        <h4 class="text-lg font-semibold mb-4">Company</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors" onclick="featureAlert()" onclick="featureAlert()">Careers</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors" onclick="featureAlert()">Press</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors" onclick="featureAlert()">Blog</a></li>
+                        </ul>
+                    </div>
 
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Support</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Contact Us</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
-                    </ul>
-                </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Support</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="#" class="hover:text-white transition-colors" onclick="featureAlert()">Help Center</a></li>
+                            <li><a href="about.html#contact" class="hover:text-white transition-colors">Contact Us</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors" onclick="featureAlert()">Terms of Service</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors" onclick="featureAlert()">Privacy Policy</a></li>
+                        </ul>
+                    </div>
             </div>
 
             <div class="border-t border-gray-700 pt-8 text-center">
-                <p class="text-gray-400">&copy; 2024 Quick Fix. All rights reserved.</p>
+                <p class="text-gray-400">&copy; 2025 Quick Fix. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script>
-         lucide.createIcons();
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeBookingModal()">&times;</span>
+            <h2>Book Your Service</h2>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label>Service Type</label>
+                    <select id="serviceType" required>
+                        <option value="">Select a service</option>
+                        <option value="Plumbing">Plumbing</option>
+                        <option value="Electrical">Electrical Work</option>
+                        <option value="Carpentry">Carpentry</option>
+                        <option value="Appliance Repair">Appliance Repair</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Address</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Preferred Date</label>
+                    <input type="date" required>
+                </div>
+                <div class="form-group">
+                    <label>Preferred Time</label>
+                    <select required>
+                        <option value="">Select time</option>
+                        <option value="morning">Morning (8AM - 12PM)</option>
+                        <option value="afternoon">Afternoon (12PM - 5PM)</option>
+                        <option value="evening">Evening (5PM - 8PM)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea placeholder="Describe the issue you're experiencing" rows="3"></textarea>
+                </div>
+                <button type="submit" class="modal-btn">Book Service</button>
+            </form>
+        </div>
+    </div>
 
-        
+    <!-- Role Select Modal -->
+    <div id="roleSelectModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeRoleSelectModal()">&times;</span>
+            <h2>Select Account Type</h2>
+            <p style="color:#64748b; margin-bottom: 1rem;">Please choose how you want to continue.</p>
+            <div class="role-options">
+                <button class="role-btn" onclick="proceedWithRoleSelection('user')">
+                    👤 Login as User
+                </button>
+                <button class="role-btn" onclick="proceedWithRoleSelection('technician')">
+                    🛠️ Login as Technician
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h2>Login to QuickFix</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" required placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" required placeholder="Enter your password">
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox"> Remember me
+                    </label>
+                </div>
+                <button type="submit" class="modal-btn">Login</button>
+                <div class="auth-links">
+                    <a href="#" onclick="closeLoginModal(); openRoleSelectModal('signup');">Don't have an account?
+                        Sign up</a>
+                    <a href="#">Forgot password?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSignupModal()">&times;</span>
+            <h2>Join QuickFix</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" required placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" required placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" required placeholder="Enter your phone number">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" required placeholder="Create a password">
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" required placeholder="Confirm your password">
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" required> I agree to the Terms of Service and Privacy Policy
+                    </label>
+                </div>
+                <button type="submit" class="modal-btn">Create Account</button>
+                <div class="auth-links">
+                    <a href="#" onclick="closeSignupModal(); openRoleSelectModal('login');">Already have an account?
+                        Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="shared.js"></script>
+    <script>
+        // Initialize active links for about page
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeActiveLinks();
+        });
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function () {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            const navMenuRight = document.querySelector('.nav-menu-right');
+
+            if (hamburger && navMenu && navMenuRight) {
+                hamburger.addEventListener('click', function () {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                    navMenuRight.classList.toggle('active');
+                });
+
+                // Close mobile menu when clicking on a link
+                document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    navMenuRight.classList.remove('active');
+                }));
+            }
+        });
+
+        lucide.createIcons();
+
+
         function handleSubmit(event) {
             event.preventDefault();
-            
+
             // Get form data
             const formData = new FormData(event.target);
             const data = Object.fromEntries(formData);
-            
+
             // Show success message
             alert('Thank you for your message! We will get back to you within 24 hours.');
-            
+
             // Reset form
             event.target.reset();
-            
+
             // In a real application, you would send this data to your server
             console.log('Form submitted:', data);
         }
@@ -376,11 +554,11 @@
         // Add scroll animations
         window.addEventListener('scroll', () => {
             const elements = document.querySelectorAll('.feature-card, .step-card, .team-card');
-            
+
             elements.forEach(element => {
                 const elementTop = element.getBoundingClientRect().top;
                 const elementVisible = 150;
-                
+
                 if (elementTop < window.innerHeight - elementVisible) {
                     element.style.opacity = '1';
                     element.style.transform = 'translateY(0)';
@@ -391,15 +569,19 @@
         // Initialize scroll animations
         document.addEventListener('DOMContentLoaded', () => {
             const elements = document.querySelectorAll('.feature-card, .step-card, .team-card');
-            
+
             elements.forEach(element => {
                 element.style.opacity = '0';
                 element.style.transform = 'translateY(30px)';
                 element.style.transition = 'all 0.6s ease';
             });
         });
+
+        function featureAlert() {
+  alert("🚧 This feature is coming soon. Stay tuned!");
+}
     </script>
-    <script src="shared.js"></script>
-   
+
 </body>
+
 </html>

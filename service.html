@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services - Quick Fix</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
- 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="service.css">
 </head>
+
 <body class="bg-gray-50">
-    <!-- ---------------------------------------------------Navbar -->
+    <!--Navbar -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
@@ -21,18 +26,28 @@
                 <li><a href="index.html" class="nav-link">Home</a></li>
                 <li><a href="service.html" class="nav-link">Services</a></li>
                 <li><a href="about.html" class="nav-link">About us</a></li>
-                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
-                <li class="nav-dropdown">
-                    <select class="language-selector">
-                        <option value="en">🇺🇸 English</option>
-                        <option value="es">🇪🇸 Español</option>
-                        <option value="fr">🇫🇷 Français</option>
-                        <option value="de">🇩🇪 Deutsch</option>
-                    </select>
-                </li>
-                <li><a href="login.html"><button class="nav-auth-btn login-btn">Login</button></a></li>
-                <!-- <li><button class="nav-auth-btn signup-btn" onclick="openSignupModal()">Sign Up</button></li> -->
+                <li><a href="about.html#contact" class="nav-link">Contact</a></li>
             </ul>
+            <div class="nav-menu-right">
+                <div class="language-selector-container">
+                    <div class="language-selector">
+                        <span class="current-language" data-lang="en">
+                            <i class="fas fa-globe me-2"></i>
+                            EN
+                        </span>
+                        <div class="language-dropdown">
+                            <div class="language-option" data-lang="en">English</div>
+                            <div class="language-option" data-lang="hi">हिंदी</div>
+                            <div class="language-option" data-lang="es">Español</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="nav-auth-btn login-btn flex items-center gap-2 px-4 py-2"
+                    onclick="openRoleSelectModal('login')">
+                    Login
+                    <i class="ri-login-box-line text-xl"></i>
+                </button>
+            </div>
             <div class="hamburger">
                 <span></span>
                 <span></span>
@@ -41,16 +56,30 @@
         </div>
     </nav>
 
-    <!-- Header -->
+    <!-- Header
     <header class="hero-gradient text-white py-16">
         <div class="container mx-auto px-4 text-center">
             <h1 class="text-4xl md:text-6xl font-bold mb-4">Our Services</h1>
             <p class="text-xl md:text-2xl opacity-90">Professional technicians for all your needs</p>
         </div>
-    </header>
+    </header> -->
+
+    <!-- Header -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Our <span class="highlight">Services</span></h1>
+            <p>From Plumbing to Painting – QuickFix brings trusted professionals right to your doorstep.</p>
+            <div class="hero-buttons">
+                <a href="#services" class="btn-primary" onclick="scrollToSection('services')">
+                    Book a Service <i data-lucide="lightbulb" class="icon-blue"></i>
+                </a>
+                <!-- <a href="#contact" class="btn-secondary" onclick="scrollToSection('contact')">Contact Us</a> -->
+            </div>
+        </div>
+    </section>
 
     <!-- Services Section -->
-    <section class="py-16">
+    <section class="py-16" id="services">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Choose Your Service</h2>
@@ -60,25 +89,26 @@
             <!-- Services Grid -->
             <div class="services-grid">
                 <!-- Plumbing Service  onclick="showTechnicians('plumbing')"-->
-                
+
                 <div class="service-card">
                     <div class="service-icon">🔧</div>
                     <h3>Plumbing</h3>
-                    <p>Leaky faucets, clogged drains, pipe repairs, and complete plumbing installations by certified professionals.</p>
+                    <p>Leaky faucets, clogged drains, pipe repairs, and complete plumbing installations.</p>
                     <ul class="service-features">
                         <li>Emergency repairs</li>
                         <li>Pipe installation</li>
                         <li>Drain cleaning</li>
                         <li>Fixture replacement</li>
                     </ul>
-                    <button class="service-btn"  onclick="showTechnicians('plumbing')">Select Service</button>
+                    <button class="service-btn" onclick="showTechnicians('plumbing')">Select Service</button>
                 </div>
 
                 <!-- Electrical Service  onclick="showTechnicians('electrical')-->
-                 <div class="service-card">
+                <div class="service-card">
                     <div class="service-icon">⚡</div>
                     <h3>Electrical Work</h3>
-                    <p>Safe and reliable electrical repairs, installations, and maintenance by licensed electricians.</p>
+                    <p>Safe and reliable electrical repairs, installations, and maintenance by licensed electricians.
+                    </p>
                     <ul class="service-features">
                         <li>Outlet installation</li>
                         <li>Light fixture repair</li>
@@ -89,7 +119,7 @@
                 </div>
 
                 <!-- AC Repair Service onclick="showTechnicians('ac')"-->
-              <div class="service-card">
+                <div class="service-card">
                     <div class="service-icon">🔨</div>
                     <h3>Carpentry</h3>
                     <p>Custom woodwork, furniture repair, and structural carpentry services by skilled craftsmen.</p>
@@ -102,102 +132,130 @@
                     <button class="service-btn" onclick="selectService('Carpentry')">Select Service</button>
                 </div>
 
-              <!-- AC Repair -->
-<div class="service-card">
-    <div class="service-icon">❄️</div>
-    <h3>AC Repair Specialists</h3>
-    <p>Professional AC installation, servicing, and repairs to keep your home cool and comfortable.</p>
-    <ul class="service-features">
-        <li>AC installation & uninstallation</li>
-        <li>Gas refilling</li>
-        <li>Cooling efficiency check</li>
-        <li>Regular maintenance</li>
-    </ul>
-    <button class="service-btn" onclick="showTechnicians('ac')">Select Service</button>
-</div>
+                <!-- AC Repair -->
+                <div class="service-card">
+                    <div class="service-icon">❄️</div>
+                    <h3>AC Repair Specialists</h3>
+                    <p>Professional AC installation, servicing, and repairs to keep your home cool and comfortable.</p>
+                    <ul class="service-features">
+                        <li>AC installation & uninstallation</li>
+                        <li>Gas refilling</li>
+                        <li>Cooling efficiency check</li>
+                        <li>Regular maintenance</li>
+                    </ul>
+                    <button class="service-btn" onclick="showTechnicians('ac')">Select Service</button>
+                </div>
 
-<!-- Painting -->
-<div class="service-card">
-    <div class="service-icon">🎨</div>
-    <h3>Expert Painters</h3>
-    <p>Transform your space with professional painting services for homes, offices, and exteriors.</p>
-    <ul class="service-features">
-        <li>Interior & exterior painting</li>
-        <li>Wall texture & design</li>
-        <li>Waterproof coating</li>
-        <li>Quick & clean service</li>
-    </ul>
-    <button class="service-btn" onclick="showTechnicians('painting')">Select Service</button>
-</div>
+                <!-- Painting -->
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h3>Expert Painters</h3>
+                    <p>Transform your space with professional painting services for homes, offices, and exteriors.</p>
+                    <ul class="service-features">
+                        <li>Interior & exterior painting</li>
+                        <li>Wall texture & design</li>
+                        <li>Waterproof coating</li>
+                        <li>Quick & clean service</li>
+                    </ul>
+                    <button class="service-btn" onclick="showTechnicians('painting')">Select Service</button>
+                </div>
 
-<!-- Carpentry -->
+                <!-- Carpentry -->
 
 
-<!-- Appliance Repair -->
-<div class="service-card">
-    <div class="service-icon">🛠️</div>
-    <h3>Appliance Repair Experts</h3>
-    <p>Fast and reliable repair services for all major household appliances.</p>
-    <ul class="service-features">
-        <li>Refrigerator repair</li>
-        <li>Washing machine service</li>
-        <li>Microwave & oven repair</li>
-        <li>Water purifier servicing</li>
-    </ul>
-    <button class="service-btn" onclick="showTechnicians('appliance')">Select Service</button>
-</div>
+                <!-- Appliance Repair -->
+                <div class="service-card">
+                    <div class="service-icon">🛠️</div>
+                    <h3>Appliance Repair Experts</h3>
+                    <p>Fast and reliable repair services for all major household appliances.</p>
+                    <ul class="service-features">
+                        <li>Refrigerator repair</li>
+                        <li>Washing machine service</li>
+                        <li>Microwave & oven repair</li>
+                        <li>Water purifier servicing</li>
+                    </ul>
+                    <button class="service-btn" onclick="showTechnicians('appliance')">Select Service</button>
+                </div>
 
             </div>
 
             <!-- Nearby Technicians Button -->
-            <div class="text-center mb-8">
-                <button id="nearbyBtn" class="nearby-btn text-white px-8 py-4 rounded-full text-xl font-bold shadow-lg" onclick="toggleMap()">
-                    📍 Find Nearby Technicians
+            <!-- <div class="text-center mb-8">
+                <button id="nearbyBtn" class="nearby-btn text-white px-8 py-4 rounded-full text-xl font-bold shadow-lg"
+                    onclick="toggleMap()">
+                    <img src="location.png" alt=""> Find Nearby Technicians
                 </button>
-            </div>
+            </div> -->
 
-            <!-- Map Section -->
-            <div id="mapSection" class="hidden mb-16">
-                <div class="bg-white rounded-2xl shadow-lg p-8">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Technicians Near You</h3>
-                    <div class="map-placeholder rounded-xl flex items-center justify-center">
-                        <div class="text-center">
-                            <div class="text-6xl mb-4">🗺️</div>
-                            <h4 class="text-xl font-semibold text-gray-600 mb-2">Interactive Map</h4>
-                            <p class="text-gray-500">Map showing nearby technicians will appear here</p>
+            <div class="text-center mb-8">
+                <!-- <div class="flex justify-center mb-8">
+                    <button id="nearbyBtn"
+                        class="nearby-btn px-8 py-4 rounded-full text-xl font-bold shadow-lg flex items-center gap-3 justify-center"
+                        onclick="toggleMap()">
+                        <img src="location.png" alt="Location Icon" class="w-10 h-10">
+                        Find Nearby Technicians
+                    </button>
+                </div> -->
+
+                <div class="flex justify-center mb-8">
+                    <button id="nearbyBtn"
+                        class="nearby-btn px-8 py-4 rounded-full text-xl font-bold shadow-lg flex items-center gap-3 justify-center"
+                        onclick="toggleMap()">
+
+                        <!-- Icon -->
+                        <span id="nearbyIcon">
+                            <!-- Location Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5s-3 1.343-3 3 1.343 3 3 3z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 22s8-10 8-14a8 8 0 10-16 0c0 4 8 14 8 14z" />
+                            </svg>
+                        </span>
+
+                        <!-- Text -->
+                        <span id="nearbyText">Find Nearby Technicians</span>
+                    </button>
+                </div>
+
+
+                <!-- Map Section -->
+                <div id="mapSection" class="hidden mb-16">
+                    <div class="bg-white rounded-2xl shadow-lg p-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Technicians Near You</h3>
+                        <div class="map-placeholder rounded-xl flex items-center justify-center">
+                            <div class="text-center">
+                                <div class="text-6xl mb-4">🗺️</div>
+                                <h4 class="text-xl font-semibold text-gray-600 mb-2">Interactive Map</h4>
+                                <p class="text-gray-500">Map showing nearby technicians will appear here</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Technicians Section -->
-            <div id="techniciansSection" class="hidden">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Available Technicians</h2>
-                    <p class="text-gray-600 text-lg" id="serviceTitle">Choose from our skilled professionals</p>
-                </div>
+                <!-- Technicians Section -->
+                <div id="techniciansSection" class="hidden">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Available Technicians</h2>
+                        <p class="text-gray-600 text-lg" id="serviceTitle">Choose from our skilled professionals</p>
+                    </div>
 
-                <!-- Technicians Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="techniciansGrid">
-                    <!-- Technician cards will be inserted here by JavaScript -->
+                    <!-- Technicians Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="techniciansGrid">
+                        <!-- Technician cards will be inserted here by JavaScript -->
+                    </div>
                 </div>
             </div>
-        </div>
     </section>
 
     <!-- Footer -->
-     <footer class="bg-gray-800 text-white py-12">
+    <footer class="bg-gray-800 text-white py-12">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                 <div>
                     <h3 class="text-2xl font-bold mb-4">Quick Fix</h3>
-                    <p class="text-gray-400 mb-4">Your trusted partner for professional home services</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">📘</a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">🐦</a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">📷</a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">💼</a>
-                    </div>
+                    <p class="text-gray-400 mb-4">Your trusted partner for professional Home Services</p>
                 </div>
 
                 <div>
@@ -213,33 +271,204 @@
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Company</h4>
                     <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Press</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors" onclick="featureAlert()"
+                                onclick="featureAlert()">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors" onclick="featureAlert()">Press</a>
+                        </li>
+                        <li><a href="#" class="hover:text-white transition-colors" onclick="featureAlert()">Blog</a>
+                        </li>
                     </ul>
                 </div>
 
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Support</h4>
                     <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Contact Us</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors" onclick="featureAlert()">Help
+                                Center</a></li>
+                        <li><a href="about.html#contact" class="hover:text-white transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors" onclick="featureAlert()">Terms of
+                                Service</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors" onclick="featureAlert()">Privacy
+                                Policy</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="border-t border-gray-700 pt-8 text-center">
-                <p class="text-gray-400">&copy; 2024 Quick Fix. All rights reserved.</p>
+                <p class="text-gray-400">&copy; 2025 Quick Fix. All rights reserved.</p>
             </div>
         </div>
     </footer>
-    
-    <script>
 
-        
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeBookingModal()">&times;</span>
+            <h2>Book Your Service</h2>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label>Service Type</label>
+                    <select id="serviceType" required>
+                        <option value="">Select a service</option>
+                        <option value="Plumbing">Plumbing</option>
+                        <option value="Electrical">Electrical Work</option>
+                        <option value="Carpentry">Carpentry</option>
+                        <option value="Appliance Repair">Appliance Repair</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Address</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Preferred Date</label>
+                    <input type="date" required>
+                </div>
+                <div class="form-group">
+                    <label>Preferred Time</label>
+                    <select required>
+                        <option value="">Select time</option>
+                        <option value="morning">Morning (8AM - 12PM)</option>
+                        <option value="afternoon">Afternoon (12PM - 5PM)</option>
+                        <option value="evening">Evening (5PM - 8PM)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea placeholder="Describe the issue you're experiencing" rows="3"></textarea>
+                </div>
+                <button type="submit" class="modal-btn">Book Service</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Role Select Modal -->
+    <div id="roleSelectModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeRoleSelectModal()">&times;</span>
+            <h2>Select Account Type</h2>
+            <p style="color:#64748b; margin-bottom: 1rem;">Please choose how you want to continue.</p>
+            <div class="role-options">
+                <button class="role-btn" onclick="proceedWithRoleSelection('user')">
+                    👤 Login as User
+                </button>
+                <button class="role-btn" onclick="proceedWithRoleSelection('technician')">
+                    🛠️ Login as Technician
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h2>Login to QuickFix</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" required placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" required placeholder="Enter your password">
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox"> Remember me
+                    </label>
+                </div>
+                <button type="submit" class="modal-btn">Login</button>
+                <div class="auth-links">
+                    <a href="#" onclick="closeLoginModal(); openRoleSelectModal('signup');">Don't have an account?
+                        Sign up</a>
+                    <a href="#">Forgot password?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSignupModal()">&times;</span>
+            <h2>Join QuickFix</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" required placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" required placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" required placeholder="Enter your phone number">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" required placeholder="Create a password">
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" required placeholder="Confirm your password">
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" required> I agree to the Terms of Service and Privacy Policy
+                    </label>
+                </div>
+                <button type="submit" class="modal-btn">Create Account</button>
+                <div class="auth-links">
+                    <a href="#" onclick="closeSignupModal(); openRoleSelectModal('login');">Already have an account?
+                        Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script src="shared.js"></script>
+    <script>
+        // Initialize active links for service page
+        document.addEventListener('DOMContentLoaded', function () {
+            initializeActiveLinks();
+        });
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function () {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            const navMenuRight = document.querySelector('.nav-menu-right');
+
+            if (hamburger && navMenu && navMenuRight) {
+                hamburger.addEventListener('click', function () {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                    navMenuRight.classList.toggle('active');
+                });
+
+                // Close mobile menu when clicking on a link
+                document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    navMenuRight.classList.remove('active');
+                }));
+            }
+        });
+
         // Sample technician data
         const techniciansData = {
             plumbing: [
@@ -354,28 +583,65 @@
             ]
         };
 
+        // function toggleMap() {
+        //     const mapSection = document.getElementById('mapSection');
+        //     const nearbyBtn = document.getElementById('nearbyBtn');
+
+        //     if (mapSection.classList.contains('hidden')) {
+        //         mapSection.classList.remove('hidden');
+        //         nearbyBtn.textContent = '📍 Hide Map';
+        //         mapSection.scrollIntoView({ behavior: 'smooth' });
+        //     } else {
+        //         mapSection.classList.add('hidden');
+        //         nearbyBtn.textContent = '📍 Find Nearby Technicians';
+        //     }
+        // }
+
         function toggleMap() {
             const mapSection = document.getElementById('mapSection');
-            const nearbyBtn = document.getElementById('nearbyBtn');
-            
+            const nearbyIcon = document.getElementById('nearbyIcon');
+            const nearbyText = document.getElementById('nearbyText');
+
             if (mapSection.classList.contains('hidden')) {
+                // Show map
                 mapSection.classList.remove('hidden');
-                nearbyBtn.textContent = '📍 Hide Map';
+                nearbyText.textContent = "Hide Map";
+
+                // Change icon → Close (X)
+                nearbyIcon.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+               stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M6 18L18 6M6 6l12 12" />
+          </svg>`;
+
                 mapSection.scrollIntoView({ behavior: 'smooth' });
             } else {
+                // Hide map
                 mapSection.classList.add('hidden');
-                nearbyBtn.textContent = '📍 Find Nearby Technicians';
+                nearbyText.textContent = "Find Nearby Technicians";
+
+                // Change icon → Location
+                nearbyIcon.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+               stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5s-3 1.343-3 3 1.343 3 3 3z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 22s8-10 8-14a8 8 0 10-16 0c0 4 8 14 8 14z" />
+          </svg>`;
             }
         }
+
 
         function showTechnicians(service) {
             const techniciansSection = document.getElementById('techniciansSection');
             const techniciansGrid = document.getElementById('techniciansGrid');
             const serviceTitle = document.getElementById('serviceTitle');
-            
+
             // Clear existing content
             techniciansGrid.innerHTML = '';
-            
+
             // Update title
             const serviceTitles = {
                 plumbing: 'Professional Plumbers',
@@ -385,19 +651,19 @@
                 carpentry: 'Skilled Carpenters',
                 appliance: 'Appliance Repair Experts'
             };
-            
+
             serviceTitle.textContent = serviceTitles[service] || 'Available Technicians';
-            
+
             // Get technicians for the service
             const technicians = techniciansData[service] || [];
-            
+
             // Create technician cards
             technicians.forEach(technician => {
                 const card = document.createElement('div');
                 card.className = 'technician-card bg-white rounded-2xl p-6 shadow-lg';
-                
+
                 const stars = '★'.repeat(Math.floor(technician.rating)) + '☆'.repeat(5 - Math.floor(technician.rating));
-                
+
                 card.innerHTML = `
                     <div class="text-center mb-4">
                         <img src="${technician.image}" alt="${technician.name}" 
@@ -412,10 +678,10 @@
                         </button>
                     </div>
                 `;
-                
+
                 techniciansGrid.appendChild(card);
             });
-            
+
             // Show section and scroll to it
             techniciansSection.classList.remove('hidden');
             techniciansSection.scrollIntoView({ behavior: 'smooth' });
@@ -426,7 +692,11 @@
             // Here you would typically redirect to a booking page
             // window.location.href = `booking.html?technician=${encodeURIComponent(name)}`;
         }
+
+        function featureAlert() {
+            alert("🚧 This feature is coming soon. Stay tuned!");
+        }
     </script>
-    <script src="shared.js"></script>
 </body>
+
 </html>
