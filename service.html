@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Quick Fix</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+ 
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="service.css">
+</head>
+<body class="bg-gray-50">
+    <!-- ---------------------------------------------------Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>QuickFix</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="service.html" class="nav-link">Services</a></li>
+                <li><a href="about.html" class="nav-link">About us</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                <li class="nav-dropdown">
+                    <select class="language-selector">
+                        <option value="en">🇺🇸 English</option>
+                        <option value="es">🇪🇸 Español</option>
+                        <option value="fr">🇫🇷 Français</option>
+                        <option value="de">🇩🇪 Deutsch</option>
+                    </select>
+                </li>
+                <li><a href="login.html"><button class="nav-auth-btn login-btn">Login</button></a></li>
+                <!-- <li><button class="nav-auth-btn signup-btn" onclick="openSignupModal()">Sign Up</button></li> -->
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="hero-gradient text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">Our Services</h1>
+            <p class="text-xl md:text-2xl opacity-90">Professional technicians for all your needs</p>
+        </div>
+    </header>
+
+    <!-- Services Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Choose Your Service</h2>
+                <p class="text-gray-600 text-lg">Select from our range of professional services</p>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="services-grid">
+                <!-- Plumbing Service  onclick="showTechnicians('plumbing')"-->
+                
+                <div class="service-card">
+                    <div class="service-icon">🔧</div>
+                    <h3>Plumbing</h3>
+                    <p>Leaky faucets, clogged drains, pipe repairs, and complete plumbing installations by certified professionals.</p>
+                    <ul class="service-features">
+                        <li>Emergency repairs</li>
+                        <li>Pipe installation</li>
+                        <li>Drain cleaning</li>
+                        <li>Fixture replacement</li>
+                    </ul>
+                    <button class="service-btn"  onclick="showTechnicians('plumbing')">Select Service</button>
+                </div>
+
+                <!-- Electrical Service  onclick="showTechnicians('electrical')-->
+                 <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Electrical Work</h3>
+                    <p>Safe and reliable electrical repairs, installations, and maintenance by licensed electricians.</p>
+                    <ul class="service-features">
+                        <li>Outlet installation</li>
+                        <li>Light fixture repair</li>
+                        <li>Circuit breaker service</li>
+                        <li>Wiring upgrades</li>
+                    </ul>
+                    <button class="service-btn" onclick="showTechnicians('electrical')">Select Service</button>
+                </div>
+
+                <!-- AC Repair Service onclick="showTechnicians('ac')"-->
+              <div class="service-card">
+                    <div class="service-icon">🔨</div>
+                    <h3>Carpentry</h3>
+                    <p>Custom woodwork, furniture repair, and structural carpentry services by skilled craftsmen.</p>
+                    <ul class="service-features">
+                        <li>Furniture repair</li>
+                        <li>Custom shelving</li>
+                        <li>Door & window repair</li>
+                        <li>Deck construction</li>
+                    </ul>
+                    <button class="service-btn" onclick="selectService('Carpentry')">Select Service</button>
+                </div>
+
+              <!-- AC Repair -->
+<div class="service-card">
+    <div class="service-icon">❄️</div>
+    <h3>AC Repair Specialists</h3>
+    <p>Professional AC installation, servicing, and repairs to keep your home cool and comfortable.</p>
+    <ul class="service-features">
+        <li>AC installation & uninstallation</li>
+        <li>Gas refilling</li>
+        <li>Cooling efficiency check</li>
+        <li>Regular maintenance</li>
+    </ul>
+    <button class="service-btn" onclick="showTechnicians('ac')">Select Service</button>
+</div>
+
+<!-- Painting -->
+<div class="service-card">
+    <div class="service-icon">🎨</div>
+    <h3>Expert Painters</h3>
+    <p>Transform your space with professional painting services for homes, offices, and exteriors.</p>
+    <ul class="service-features">
+        <li>Interior & exterior painting</li>
+        <li>Wall texture & design</li>
+        <li>Waterproof coating</li>
+        <li>Quick & clean service</li>
+    </ul>
+    <button class="service-btn" onclick="showTechnicians('painting')">Select Service</button>
+</div>
+
+<!-- Carpentry -->
+
+
+<!-- Appliance Repair -->
+<div class="service-card">
+    <div class="service-icon">🛠️</div>
+    <h3>Appliance Repair Experts</h3>
+    <p>Fast and reliable repair services for all major household appliances.</p>
+    <ul class="service-features">
+        <li>Refrigerator repair</li>
+        <li>Washing machine service</li>
+        <li>Microwave & oven repair</li>
+        <li>Water purifier servicing</li>
+    </ul>
+    <button class="service-btn" onclick="showTechnicians('appliance')">Select Service</button>
+</div>
+
+            </div>
+
+            <!-- Nearby Technicians Button -->
+            <div class="text-center mb-8">
+                <button id="nearbyBtn" class="nearby-btn text-white px-8 py-4 rounded-full text-xl font-bold shadow-lg" onclick="toggleMap()">
+                    📍 Find Nearby Technicians
+                </button>
+            </div>
+
+            <!-- Map Section -->
+            <div id="mapSection" class="hidden mb-16">
+                <div class="bg-white rounded-2xl shadow-lg p-8">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Technicians Near You</h3>
+                    <div class="map-placeholder rounded-xl flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="text-6xl mb-4">🗺️</div>
+                            <h4 class="text-xl font-semibold text-gray-600 mb-2">Interactive Map</h4>
+                            <p class="text-gray-500">Map showing nearby technicians will appear here</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technicians Section -->
+            <div id="techniciansSection" class="hidden">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Available Technicians</h2>
+                    <p class="text-gray-600 text-lg" id="serviceTitle">Choose from our skilled professionals</p>
+                </div>
+
+                <!-- Technicians Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="techniciansGrid">
+                    <!-- Technician cards will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+     <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Quick Fix</h3>
+                    <p class="text-gray-400 mb-4">Your trusted partner for professional home services</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">📘</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">🐦</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">📷</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">💼</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Plumbing</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Electrical</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">AC Repair</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Painting</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Press</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2024 Quick Fix. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+
+        
+        // Sample technician data
+        const techniciansData = {
+            plumbing: [
+                {
+                    name: "Ramesh Kumar",
+                    skills: "Plumbing, Pipe Fitting",
+                    rating: 4.8,
+                    experience: "8 years experience",
+                    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+                },
+                {
+                    name: "Suresh Patel",
+                    skills: "Plumbing, Water Heaters",
+                    rating: 4.9,
+                    experience: "12 years experience",
+                    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+                },
+                {
+                    name: "Vikram Singh",
+                    skills: "Plumbing, Drainage",
+                    rating: 4.7,
+                    experience: "6 years experience",
+                    image: "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?w=150&h=150&fit=crop&crop=face"
+                }
+            ],
+            electrical: [
+                {
+                    name: "Amit Sharma",
+                    skills: "Electrical, Wiring",
+                    rating: 4.9,
+                    experience: "10 years experience",
+                    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face"
+                },
+                {
+                    name: "Rajesh Gupta",
+                    skills: "Electrical, Solar Panels",
+                    rating: 4.8,
+                    experience: "15 years experience",
+                    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop&crop=face"
+                },
+                {
+                    name: "Deepak Verma",
+                    skills: "Electrical, Smart Home",
+                    rating: 4.6,
+                    experience: "7 years experience",
+                    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face"
+                }
+            ],
+            ac: [
+                {
+                    name: "Mahesh Kumar",
+                    skills: "AC Repair, Installation",
+                    rating: 4.8,
+                    experience: "9 years experience",
+                    image: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=150&h=150&fit=crop&crop=face"
+                },
+                {
+                    name: "Anil Yadav",
+                    skills: "AC Service, Refrigeration",
+                    rating: 4.7,
+                    experience: "11 years experience",
+                    image: "https://images.unsplash.com/photo-1558222218-b7b54eede3f3?w=150&h=150&fit=crop&crop=face"
+                }
+            ],
+            painting: [
+                {
+                    name: "Ravi Painter",
+                    skills: "Interior, Exterior Painting",
+                    rating: 4.9,
+                    experience: "14 years experience",
+                    image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face"
+                },
+                {
+                    name: "Mohan Lal",
+                    skills: "Wall Painting, Texture",
+                    rating: 4.6,
+                    experience: "8 years experience",
+                    image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=150&h=150&fit=crop&crop=face"
+                }
+            ],
+            carpentry: [
+                {
+                    name: "Santosh Carpenter",
+                    skills: "Furniture, Wood Work",
+                    rating: 4.8,
+                    experience: "12 years experience",
+                    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=150&h=150&fit=crop&crop=face"
+                },
+                {
+                    name: "Dinesh Kumar",
+                    skills: "Custom Furniture, Repair",
+                    rating: 4.7,
+                    experience: "10 years experience",
+                    image: "https://images.unsplash.com/photo-1542178243-bc20204b769f?w=150&h=150&fit=crop&crop=face"
+                }
+            ],
+            appliance: [
+                {
+                    name: "Praveen Tech",
+                    skills: "Home Appliances, Electronics",
+                    rating: 4.9,
+                    experience: "13 years experience",
+                    image: "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=150&h=150&fit=crop&crop=face"
+                },
+                {
+                    name: "Kiran Mechanic",
+                    skills: "Washing Machine, Microwave",
+                    rating: 4.6,
+                    experience: "7 years experience",
+                    image: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=150&h=150&fit=crop&crop=face"
+                }
+            ]
+        };
+
+        function toggleMap() {
+            const mapSection = document.getElementById('mapSection');
+            const nearbyBtn = document.getElementById('nearbyBtn');
+            
+            if (mapSection.classList.contains('hidden')) {
+                mapSection.classList.remove('hidden');
+                nearbyBtn.textContent = '📍 Hide Map';
+                mapSection.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                mapSection.classList.add('hidden');
+                nearbyBtn.textContent = '📍 Find Nearby Technicians';
+            }
+        }
+
+        function showTechnicians(service) {
+            const techniciansSection = document.getElementById('techniciansSection');
+            const techniciansGrid = document.getElementById('techniciansGrid');
+            const serviceTitle = document.getElementById('serviceTitle');
+            
+            // Clear existing content
+            techniciansGrid.innerHTML = '';
+            
+            // Update title
+            const serviceTitles = {
+                plumbing: 'Professional Plumbers',
+                electrical: 'Certified Electricians',
+                ac: 'AC Repair Specialists',
+                painting: 'Expert Painters',
+                carpentry: 'Skilled Carpenters',
+                appliance: 'Appliance Repair Experts'
+            };
+            
+            serviceTitle.textContent = serviceTitles[service] || 'Available Technicians';
+            
+            // Get technicians for the service
+            const technicians = techniciansData[service] || [];
+            
+            // Create technician cards
+            technicians.forEach(technician => {
+                const card = document.createElement('div');
+                card.className = 'technician-card bg-white rounded-2xl p-6 shadow-lg';
+                
+                const stars = '★'.repeat(Math.floor(technician.rating)) + '☆'.repeat(5 - Math.floor(technician.rating));
+                
+                card.innerHTML = `
+                    <div class="text-center mb-4">
+                        <img src="${technician.image}" alt="${technician.name}" 
+                             class="w-20 h-20 rounded-full mx-auto mb-4 object-cover shadow-md">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">${technician.name}</h3>
+                        <p class="text-blue-600 font-semibold mb-2">${technician.skills}</p>
+                        <div class="rating-stars text-xl mb-2">${stars} ${technician.rating}</div>
+                        <p class="text-gray-600 text-sm mb-4">${technician.experience}</p>
+                        <button class="book-btn text-white px-6 py-3 rounded-full font-semibold w-full" 
+                                onclick="bookTechnician('${technician.name}')">
+                            Book Now
+                        </button>
+                    </div>
+                `;
+                
+                techniciansGrid.appendChild(card);
+            });
+            
+            // Show section and scroll to it
+            techniciansSection.classList.remove('hidden');
+            techniciansSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function bookTechnician(name) {
+            alert(`Booking request sent for ${name}! You will be redirected to the booking page.`);
+            // Here you would typically redirect to a booking page
+            // window.location.href = `booking.html?technician=${encodeURIComponent(name)}`;
+        }
+    </script>
+    <script src="shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Quick Fix</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+ <!-- <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+   -->
+     <link rel="stylesheet" href="about.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+       <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>QuickFix</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="servise.html" class="nav-link">Services</a></li>
+                <li><a href="about.html" class="nav-link">about us</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                <li class="nav-dropdown">
+                    <select class="language-selector">
+                        <option value="en">🇺🇸 English</option>
+                        <option value="es">🇪🇸 Español</option>
+                        <option value="fr">🇫🇷 Français</option>
+                        <option value="de">🇩🇪 Deutsch</option>
+                    </select>
+                </li>
+                <li><a href="login.html"><button class="nav-auth-btn login-btn">Login</button></a></li>
+                <!-- <li><button class="nav-auth-btn signup-btn" onclick="openSignupModal()">Sign Up</button></li> -->
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>About <span class="highlight">QuickFix Solutions</span></h1>
+            <p>We're revolutionizing how businesses solve their most complex challenges through innovative technology solutions, expert consultation, and unwavering commitment to excellence.</p>
+            <div class="hero-buttons">
+                <a href="#how-it-works" class="btn-primary" onclick="scrollToSection('how-it-works')">
+                    Learn More  <i data-lucide="lightbulb" class="icon-blue"></i>
+                </a>
+                <a href="#contact" class="btn-secondary" onclick="scrollToSection('contact')">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="section how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>How It Works</h2>
+                <p>Our streamlined process ensures you get the best solutions with maximum efficiency</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon blue">
+                        <i data-lucide="lightbulb" class="icon-blue"></i>
+                    </div>
+                    <h3>1. Consultation</h3>
+                    <p>We start with a comprehensive consultation to understand your unique challenges and requirements, ensuring we deliver exactly what you need.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon green">
+                        <i data-lucide="rocket" class="icon-green"></i>
+                    </div>
+                    <h3>2. Implementation</h3>
+                    <p>Our expert team implements cutting-edge solutions using the latest technologies and industry best practices for optimal results.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon orange">
+                        <i data-lucide="shield" class="icon-orange"></i>
+                    </div>
+                    <h3>3. Support</h3>
+                    <p>We provide ongoing support and maintenance to ensure your solutions continue to perform at their peak long after implementation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- Vision, Mission, Goals Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Our Purpose</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Driven by innovation and commitment to excellence</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Vision -->
+                <div class="vision-card rounded-2xl p-8 text-white text-center">
+                    <div class="text-6xl mb-6">🔮</div>
+                    <h3 class="text-2xl font-bold mb-4">Our Vision</h3>
+                    <p class="opacity-90">To become the leading platform connecting homeowners with trusted professionals, making home maintenance effortless and reliable for everyone.</p>
+                </div>
+
+                <!-- Mission -->
+                <div class="mission-card rounded-2xl p-8 text-white text-center">
+                    <div class="text-6xl mb-6">🎯</div>
+                    <h3 class="text-2xl font-bold mb-4">Our Mission</h3>
+                    <p class="opacity-90">Empowering skilled technicians and providing homeowners with quick, reliable, and affordable solutions for all their home service needs.</p>
+                </div>
+
+                <!-- Goals -->
+                <div class="goal-card rounded-2xl p-8 text-white text-center">
+                    <div class="text-6xl mb-6">🚀</div>
+                    <h3 class="text-2xl font-bold mb-4">Our Goals</h3>
+                    <p class="opacity-90">Expand to 100+ cities, maintain 99% customer satisfaction, and create sustainable livelihoods for 10,000+ skilled professionals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Why Choose Quick Fix?</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">We're committed to providing the best service experience</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="feature-card bg-white rounded-2xl p-8 text-center">
+                    <div class="text-5xl mb-4">🛡️</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Verified Professionals</h3>
+                    <p class="text-gray-600">All technicians are background-checked, certified, and insured for your peace of mind</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card bg-white rounded-2xl p-8 text-center">
+                    <div class="text-5xl mb-4">⚡</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Quick Response</h3>
+                    <p class="text-gray-600">Same-day service available with technicians ready to help within hours</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card bg-white rounded-2xl p-8 text-center">
+                    <div class="text-5xl mb-4">💰</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Fair Pricing</h3>
+                    <p class="text-gray-600">Transparent, upfront pricing with no hidden fees or surprise charges</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card bg-white rounded-2xl p-8 text-center">
+                    <div class="text-5xl mb-4">⭐</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Quality Guarantee</h3>
+                    <p class="text-gray-600">100% satisfaction guarantee with free follow-up service if needed</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="feature-card bg-white rounded-2xl p-8 text-center">
+                    <div class="text-5xl mb-4">📞</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">24/7 Support</h3>
+                    <p class="text-gray-600">Round-the-clock customer support for emergencies and assistance</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="feature-card bg-white rounded-2xl p-8 text-center">
+                    <div class="text-5xl mb-4">📱</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Easy Booking</h3>
+                    <p class="text-gray-600">User-friendly platform with simple booking process and real-time tracking</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+   <!-- About Section -->
+    <section id="about" class="section about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Why Choose QuickFix Solutions?</h2>
+                    <p>Founded in 2015, we've grown from a small startup to a trusted partner for hundreds of businesses worldwide. Our team of experts brings decades of combined experience in technology, strategy, and business transformation.</p>
+                    <div class="features">
+                        <div class="feature">
+                            <i data-lucide="award" class="icon-blue"></i>
+                            <div>
+                                <h4>Industry Recognition</h4>
+                                <p>Winner of multiple industry awards for innovation and excellence</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <i data-lucide="users" class="icon-green"></i>
+                            <div>
+                                <h4>Expert Team</h4>
+                                <p>50+ certified professionals with deep industry expertise</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <i data-lucide="globe" class="icon-orange"></i>
+                            <div>
+                                <h4>Global Reach</h4>
+                                <p>Serving clients across 25+ countries with 24/7 support</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card blue">
+                        <div class="stat-number blue">500+</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                    <div class="stat-card green">
+                        <div class="stat-number green">98%</div>
+                        <div class="stat-label">Client Satisfaction</div>
+                    </div>
+                    <div class="stat-card orange">
+                        <div class="stat-number orange">8+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-card purple">
+                        <div class="stat-number purple">24/7</div>
+                        <div class="stat-label">Support Available</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+                <p>Ready to transform your business? Contact us today and let's discuss how we can help you achieve your goals.</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-form">
+                    <h3>Send us a message</h3>
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" placeholder="John">
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" placeholder="Doe">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="john@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Subject</label>
+                            <input type="text" placeholder="How can we help you?">
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea placeholder="Tell us about your project..."></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-card-icon blue">
+                            <i data-lucide="mail" class="icon-blue"></i>
+                        </div>
+                        <h4>Email Us</h4>
+                        <p>hello@quickfixsolutions.com</p>
+                        <p>support@quickfixsolutions.com</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-card-icon green">
+                            <i data-lucide="phone" class="icon-green"></i>
+                        </div>
+                        <h4>Call Us</h4>
+                        <p>+1 (555) 123-4567</p>
+                        <p>+1 (555) 987-6543</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-card-icon orange">
+                            <i data-lucide="map-pin" class="icon-orange"></i>
+                        </div>
+                        <h4>Visit Us</h4>
+                        <p>123 Innovation Drive</p>
+                        <p>Tech City, TC 12345</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Quick Fix</h3>
+                    <p class="text-gray-400 mb-4">Your trusted partner for professional home services</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">📘</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">🐦</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">📷</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">💼</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Plumbing</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Electrical</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">AC Repair</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Painting</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Press</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2024 Quick Fix. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+         lucide.createIcons();
+
+        
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            
+            // Show success message
+            alert('Thank you for your message! We will get back to you within 24 hours.');
+            
+            // Reset form
+            event.target.reset();
+            
+            // In a real application, you would send this data to your server
+            console.log('Form submitted:', data);
+        }
+
+        // Add scroll animations
+        window.addEventListener('scroll', () => {
+            const elements = document.querySelectorAll('.feature-card, .step-card, .team-card');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Initialize scroll animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.feature-card, .step-card, .team-card');
+            
+            elements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'all 0.6s ease';
+            });
+        });
+    </script>
+    <script src="shared.js"></script>
+   
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Login - QuickFix</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		:root[data-theme='dark'] { color-scheme: dark; }
+		.glass-bg { 
+			background: rgba(255, 255, 255, 0.7); 
+			backdrop-filter: blur(10px); 
+			border: 1px solid rgba(255, 255, 255, 0.125);
+			box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+		}
+		:root[data-theme='dark'] .glass-bg {
+			background: rgba(17, 24, 39, 0.7);
+			border-color: rgba(55, 65, 81, 0.2);
+		}
+		.gradient-bg {
+			background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(16,185,129,0.1));
+		}
+		.input-glass {
+			background: rgba(255,255,255,0.5);
+			backdrop-filter: blur(5px);
+			border: 1px solid rgba(255,255,255,0.2);
+		}
+	</style>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen gradient-bg">
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>QuickFix</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="servise.html" class="nav-link">Services</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                <li class="nav-dropdown">
+                    <select class="language-selector">
+                        <option value="en">🇺🇸 English</option>
+                        <option value="es">🇪🇸 Español</option>
+                        <option value="fr">🇫🇷 Français</option>
+                        <option value="de">🇩🇪 Deutsch</option>
+                    </select>
+                </li>
+                <li><a href="login.html"><button class="nav-auth-btn login-btn">Login</button></a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+	<div class="w-full max-w-md p-6 mx-auto pt-28">
+		<section class="glass-bg rounded-2xl p-8 shadow-lg">
+			<div class="text-center mb-6">
+				<h1 class="text-3xl font-bold text-blue-600 mb-2">QuickFix</h1>
+				<p class="text-gray-600">Sign in to your account</p>
+			</div>
+			<form id="login-form" class="space-y-4">
+				<div>
+					<label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+					<input type="email" class="w-full border rounded-lg px-3 py-2 input-glass" name="email" placeholder="you@example.com" required />
+				</div>
+				<div>
+					<label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+					<input type="password" class="w-full border rounded-lg px-3 py-2 input-glass" name="password" placeholder="Your password" required />
+				</div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Login as</label>
+                    <div class="flex items-center gap-6 bg-white/60 rounded-lg p-3 input-glass">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="role" value="user" class="accent-blue-600" checked />
+                            <span class="text-gray-800">User</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="role" value="technician" class="accent-blue-600" />
+                            <span class="text-gray-800">Technician</span>
+                        </label>
+                    </div>
+                </div>
+				<button type="submit" class="w-full px-4 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-500 transition">
+					Sign In
+				</button>
+			</form>
+			<div class="mt-4 text-center text-sm">
+				<a href="#" class="text-blue-600 hover:underline">Create an account</a>
+				<span class="mx-2">•</span>
+				<a href="#" class="text-blue-600 hover:underline">Forgot password?</a>
+			</div>
+		</section>
+	</div>
+    <script src="shared.js"></script>
+    <script>
+        (function(){
+            const form = document.getElementById('login-form');
+            if (!form) return;
+            form.addEventListener('submit', function(e){
+                e.preventDefault();
+                const role = document.querySelector('input[name="role"]:checked')?.value || 'user';
+                try { localStorage.setItem('quickfix-role', role); } catch (_) {}
+                alert(`Login successful as ${role === 'technician' ? 'Technician' : 'User'}.`);
+            });
+        })();
+    </script>
+</body>
+</html>
