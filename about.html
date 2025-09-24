@@ -9,14 +9,39 @@
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="about.css">
     <link rel="stylesheet" href="style.css">
+    <script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+        }
+
+        function translateLanguage(lang) {
+            var selectField = document.querySelector(".goog-te-combo");
+            if (selectField) {
+                selectField.value = lang;
+                selectField.dispatchEvent(new Event("change"));
+            }
+        }
+
+        function changeLanguage(lang) {
+            let translateElement = document.querySelector('.goog-te-combo');
+            if (translateElement) {
+                translateElement.value = lang;
+                translateElement.dispatchEvent(new Event('change'));
+            } else {
+                alert("Google Translate is not ready yet.");
+            }
+        }
+    </script>
 </head>
 
 <body class="bg-gray-50">
+    <div id="google_translate_element" style="position:absolute; left:-9999px; top:auto; height:0; overflow:hidden">
+    </div>
     <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-container">
@@ -37,17 +62,17 @@
                             EN
                         </span>
                         <div class="language-dropdown">
-                            <div class="language-option" data-lang="en">English</div>
-                            <div class="language-option" data-lang="hi">हिंदी</div>
-                            <div class="language-option" data-lang="es">Español</div>
+                            <div class="language-option" data-lang="en" onclick="changeLanguage('en')">English</div>
+                            <div class="language-option" data-lang="hi" onclick="changeLanguage('hi')">हिंदी</div>
+                            <div class="language-option" data-lang="gu" onclick="changeLanguage('gu')">ગુજરાતી</div>
                         </div>
                     </div>
                 </div>
-                 <button class="nav-auth-btn login-btn flex items-center gap-2 px-4 py-2"
-                        onclick="openRoleSelectModal('login')">
-                        Login
-                        <i class="ri-login-box-line text-xl"></i> 
-                    </button>
+                <button class="nav-auth-btn login-btn flex items-center gap-2 px-4 py-2"
+                    onclick="openRoleSelectModal('login')">
+                    Login
+                    <i class="ri-login-box-line text-xl"></i>
+                </button>
             </div>
             <div class="hamburger">
                 <span></span>
@@ -61,7 +86,8 @@
     <section id="home" class="hero">
         <div class="container">
             <h1>About <span class="highlight">QuickFix</span></h1>
-            <p>QuickFix connects you with verified professionals for plumbing, electrical, AC repair, painting, and more – anytime, anywhere.</p>
+            <p>QuickFix connects you with verified professionals for plumbing, electrical, AC repair, painting, and more
+                – anytime, anywhere.</p>
             <div class="hero-buttons">
                 <a href="#how-it-works" class="btn-primary" onclick="scrollToSection('how-it-works')">
                     Learn More <i data-lucide="lightbulb" class="icon-blue"></i>
@@ -119,21 +145,24 @@
                 <div class="vision-card rounded-2xl p-8 text-white text-center">
                     <div class="text-6xl mb-6">🔮</div>
                     <h3 class="text-2xl font-bold mb-4">Our Vision</h3>
-                    <p class="opacity-90">To make home maintenance effortless, reliable, and accessible for everyone.</p>
+                    <p class="opacity-90">To make home maintenance effortless, reliable, and accessible for everyone.
+                    </p>
                 </div>
 
                 <!-- Mission -->
                 <div class="mission-card rounded-2xl p-8 text-white text-center">
                     <div class="text-6xl mb-6">🎯</div>
                     <h3 class="text-2xl font-bold mb-4">Our Mission</h3>
-                    <p class="opacity-90">Empowering skilled technicians while providing homeowners with affordable, quick, and trustworthy services.</p>
+                    <p class="opacity-90">Empowering skilled technicians while providing homeowners with affordable,
+                        quick, and trustworthy services.</p>
                 </div>
 
                 <!-- Goals -->
                 <div class="goal-card rounded-2xl p-8 text-white text-center">
                     <div class="text-6xl mb-6">🚀</div>
                     <h3 class="text-2xl font-bold mb-4">Our Goals</h3>
-                    <p class="opacity-90">Expand to 100+ cities, ensure 99% customer satisfaction, and support 10,000+ skilled professionals.</p>
+                    <p class="opacity-90">Expand to 100+ cities, ensure 99% customer satisfaction, and support 10,000+
+                        skilled professionals.</p>
                 </div>
             </div>
         </div>
@@ -202,7 +231,10 @@
             <div class="about-content">
                 <div class="about-text">
                     <h2>Why Choose QuickFix Solutions?</h2>
-                    <p>Founded in 2025, QuickFix has grown from a small local service provider into a trusted partner for thousands of households. Our team of skilled professionals brings years of hands-on experience in plumbing, electrical, carpentry, appliance repair, and more — ensuring reliable, fast, and affordable solutions for every home.</p>
+                    <p>Founded in 2025, QuickFix has grown from a small local service provider into a trusted partner
+                        for thousands of households. Our team of skilled professionals brings years of hands-on
+                        experience in plumbing, electrical, carpentry, appliance repair, and more — ensuring reliable,
+                        fast, and affordable solutions for every home.</p>
                     <div class="features">
                         <div class="feature">
                             <i data-lucide="award" class="icon-blue"></i>
@@ -254,7 +286,8 @@
         <div class="container">
             <div class="section-title">
                 <h2>Get In Touch</h2>
-                <p>Need quick and reliable help? Whether it’s a repair, installation, or urgent support, QuickFix is just a call away. Reach out today and let’s solve your problem the easy way.</p>
+                <p>Need quick and reliable help? Whether it’s a repair, installation, or urgent support, QuickFix is
+                    just a call away. Reach out today and let’s solve your problem the easy way.</p>
             </div>
             <div class="contact-content">
                 <div class="contact-form">
@@ -335,25 +368,31 @@
                     </ul>
                 </div>
 
-<div>
-                        <h4 class="text-lg font-semibold mb-4">Company</h4>
-                        <ul class="space-y-2 text-gray-400">
-                            <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors" onclick="featureAlert()" onclick="featureAlert()">Careers</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors" onclick="featureAlert()">Press</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors" onclick="featureAlert()">Blog</a></li>
-                        </ul>
-                    </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors" onclick="featureAlert()"
+                                onclick="featureAlert()">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors" onclick="featureAlert()">Press</a>
+                        </li>
+                        <li><a href="#" class="hover:text-white transition-colors" onclick="featureAlert()">Blog</a>
+                        </li>
+                    </ul>
+                </div>
 
-                    <div>
-                        <h4 class="text-lg font-semibold mb-4">Support</h4>
-                        <ul class="space-y-2 text-gray-400">
-                            <li><a href="#" class="hover:text-white transition-colors" onclick="featureAlert()">Help Center</a></li>
-                            <li><a href="about.html#contact" class="hover:text-white transition-colors">Contact Us</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors" onclick="featureAlert()">Terms of Service</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors" onclick="featureAlert()">Privacy Policy</a></li>
-                        </ul>
-                    </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors" onclick="featureAlert()">Help
+                                Center</a></li>
+                        <li><a href="about.html#contact" class="hover:text-white transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors" onclick="featureAlert()">Terms of
+                                Service</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors" onclick="featureAlert()">Privacy
+                                Policy</a></li>
+                    </ul>
+                </div>
             </div>
 
             <div class="border-t border-gray-700 pt-8 text-center">
@@ -506,7 +545,7 @@
     <script src="shared.js"></script>
     <script>
         // Initialize active links for about page
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             initializeActiveLinks();
         });
         // Mobile menu toggle
@@ -578,10 +617,12 @@
         });
 
         function featureAlert() {
-  alert("🚧 This feature is coming soon. Stay tuned!");
-}
+            alert("🚧 This feature is coming soon. Stay tuned!");
+        }
     </script>
 
+    <script type="text/javascript"
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 
 </html>

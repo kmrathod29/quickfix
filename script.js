@@ -1,3 +1,4 @@
+
 // Mobile menu toggle and splash screen functionality
 document.addEventListener("DOMContentLoaded", function () {
   // Show splash screen

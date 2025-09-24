@@ -13,9 +13,34 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="service.css">
+    <script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+        }
+
+        function translateLanguage(lang) {
+            var selectField = document.querySelector(".goog-te-combo");
+            if (selectField) {
+                selectField.value = lang;
+                selectField.dispatchEvent(new Event("change"));
+            }
+        }
+
+        function changeLanguage(lang) {
+            let translateElement = document.querySelector('.goog-te-combo');
+            if (translateElement) {
+                translateElement.value = lang;
+                translateElement.dispatchEvent(new Event('change'));
+            } else {
+                alert("Google Translate is not ready yet.");
+            }
+        }
+    </script>
 </head>
 
 <body class="bg-gray-50">
+    <div id="google_translate_element" style="position:absolute; left:-9999px; top:auto; height:0; overflow:hidden">
+    </div>
     <!--Navbar -->
     <nav class="navbar">
         <div class="nav-container">
@@ -35,11 +60,11 @@
                             <i class="fas fa-globe me-2"></i>
                             EN
                         </span>
-                        <div class="language-dropdown">
-                            <div class="language-option" data-lang="en">English</div>
-                            <div class="language-option" data-lang="hi">हिंदी</div>
-                            <div class="language-option" data-lang="es">Español</div>
-                        </div>
+                     <div class="language-dropdown">
+                                <div class="language-option" data-lang="en" onclick="changeLanguage('en')">English</div>
+                                <div class="language-option" data-lang="hi" onclick="changeLanguage('hi')">हिंदी</div>
+                                <div class="language-option" data-lang="gu" onclick="changeLanguage('gu')">ગુજરાતી</div>
+                            </div>
                     </div>
                 </div>
                 <button class="nav-auth-btn login-btn flex items-center gap-2 px-4 py-2"
@@ -697,6 +722,8 @@
             alert("🚧 This feature is coming soon. Stay tuned!");
         }
     </script>
+    <script type="text/javascript"
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 
 </html>
