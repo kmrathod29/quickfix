@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Dashboard - QuickFix</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../style.css" />
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+    }
+
+    function translateLanguage(lang) {
+      var selectField = document.querySelector(".goog-te-combo");
+      if (selectField) {
+        selectField.value = lang;
+        selectField.dispatchEvent(new Event("change"));
+      }
+    }
+
+    function changeLanguage(lang) {
+      let translateElement = document.querySelector('.goog-te-combo');
+      if (translateElement) {
+        translateElement.value = lang;
+        translateElement.dispatchEvent(new Event('change'));
+      } else {
+        alert("Google Translate is not ready yet.");
+      }
+    }
+  </script>
+
+</head>
+
+<body class="bg-gray-50" data-protected="true">
+
+  <div id="google_translate_element" style="position:absolute; left:-9999px; top:auto; height:0; overflow:hidden">
+  </div>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <h2>QuickFix</h2>
+      </div>
+      <ul class="nav-menu">
+        <li><a href="../index.html" class="nav-link">Home</a></li>
+        <li><a href="../service.html" class="nav-link">Services</a></li>
+        <li><a href="../about.html" class="nav-link">About us</a></li>
+        <li><a href="../about.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-menu-right">
+        <div class="language-selector-container">
+          <div class="language-selector">
+            <span class="current-language" data-lang="en">
+              <i class="fas fa-globe me-2"></i>
+              EN
+            </span>
+            <div class="language-dropdown">
+              <div class="language-option" data-lang="en" onclick="changeLanguage('en')">English</div>
+              <div class="language-option" data-lang="hi" onclick="changeLanguage('hi')">हिंदी</div>
+              <div class="language-option" data-lang="gu" onclick="changeLanguage('gu')">ગુજરાતી</div>
+            </div>
+          </div>
+        </div>
+        <!-- <button class="nav-auth-btn login-btn" onclick="openRoleSelectModal('login')">
+                        Login
+                        <svg xmlns="http://www.w3.org/2000/svg" class="login-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                        <i class="ri-login-box-line"></i>
+                    </button> -->
+
+        <button class="nav-auth-btn login-btn flex items-center gap-2 px-4 py-2" onclick="openRoleSelectModal('login')">
+          Login
+          <i class="ri-login-box-line text-xl"></i>
+        </button>
+      </div>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mx-auto px-4 pt-24 pb-16">
+    <h1 class="text-3xl font-bold mb-8">My Dashboard</h1>
+
+    <!-- Summary Cards -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      <div class="bg-white p-6 rounded-xl shadow">
+        <div class="text-sm text-gray-500">Total Bookings</div>
+        <div class="text-3xl font-bold" id="sumTotal">-</div>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow">
+        <div class="text-sm text-gray-500">Completed</div>
+        <div class="text-3xl font-bold" id="sumCompleted">-</div>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow">
+        <div class="text-sm text-gray-500">Pending</div>
+        <div class="text-3xl font-bold" id="sumPending">-</div>
+      </div>
+    </section>
+
+    <!-- Profile -->
+    <section class="bg-white rounded-xl shadow p-6 mb-10">
+      <h2 class="text-xl font-semibold mb-4">Profile</h2>
+      <form id="profileForm" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <input class="border rounded px-3 py-2" placeholder="Name" id="name" />
+        <input class="border rounded px-3 py-2" placeholder="Phone" id="phone" />
+        <input class="border rounded px-3 py-2" placeholder="Address" id="address" />
+        <button class="px-4 py-2 bg-blue-600 text-white rounded md:col-span-3" type="submit">Save</button>
+      </form>
+    </section>
+
+    <!-- Booking History -->
+    <section class="bg-white rounded-xl shadow p-6">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-xl font-semibold">My Bookings</h2>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full text-sm">
+          <thead>
+            <tr class="bg-gray-100 text-left">
+              <th class="p-2">Service</th>
+              <th class="p-2">Date</th>
+              <th class="p-2">Status</th>
+            </tr>
+          </thead>
+          <tbody id="myBookings"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script type="text/javascript"
+    src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script src="../shared.js"></script>
+  <script src="./user.js"></script>
+</body>
+
+</html>

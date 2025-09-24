@@ -455,11 +455,12 @@
         </div>
     </div>
 
-    <!-- Role Select Modal -->
-    <div id="roleSelectModal" class="modal">
+    <!-- Role Select Login Modal -->
+    <div id="roleSelectLoginModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeRoleSelectModal()">&times;</span>
-            <h2>Select Account Type</h2>
+            <span class="close" onclick="closeRoleSelectLoginModal()">&times;</span>
+            <h2>Welcome Back!</h2>
+            <h3>Select Account Type</h>3
             <p style="color:#64748b; margin-bottom: 1rem;">Please choose how you want to continue.</p>
             <div class="role-options">
                 <button class="role-btn" onclick="proceedWithRoleSelection('user')">
@@ -471,6 +472,25 @@
             </div>
         </div>
     </div>
+
+    <!-- Role Select Signup Modal -->
+    <div id="roleSelectSignupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeRoleSelectSignupModal()">&times;</span>
+            <h2>Create Your Account</h2>
+            <h3>Select Account Type</h3>
+            <p style="color:#64748b; margin-bottom: 1rem;">Please choose how you want to continue.</p>
+            <div class="role-options">
+                <button class="role-btn" onclick="proceedWithRoleSelection('user')">
+                    👤 Signup as User
+                </button>
+                <button class="role-btn" onclick="proceedWithRoleSelection('technician')">
+                    🛠️ Signup as Technician
+                </button>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Login Modal -->
     <div id="loginModal" class="modal">
@@ -540,7 +560,6 @@
             </form>
         </div>
     </div>
-
     <script src="script.js"></script>
     <script src="shared.js"></script>
     <script>

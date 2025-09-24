@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard - QuickFix</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body class="bg-gray-50">
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo"><h2>QuickFix Admin</h2></div>
+      <ul class="nav-menu">
+        <li><a href="../index.html" class="nav-link">Home</a></li>
+        <li><a href="#" class="nav-link">Admin</a></li>
+        <li class="nav-dropdown">
+          <select class="language-selector">
+            <option value="en">🇺🇸 English</option>
+          </select>
+        </li>
+        <li><button class="nav-auth-btn login-btn" onclick="window.location.href='../login.html'">Login</button></li>
+      </ul>
+      <div class="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </nav>
+
+  <main class="container mx-auto px-4 pt-24 pb-16">
+    <h1 class="text-3xl font-bold mb-8">Admin Dashboard</h1>
+
+    <!-- Summary Cards -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10" id="summary">
+      <div class="bg-white p-6 rounded-xl shadow">
+        <div class="text-sm text-gray-500">Users</div>
+        <div class="text-3xl font-bold" id="sumUsers">-</div>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow">
+        <div class="text-sm text-gray-500">Services</div>
+        <div class="text-3xl font-bold" id="sumServices">-</div>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow">
+        <div class="text-sm text-gray-500">Bookings</div>
+        <div class="text-3xl font-bold" id="sumBookings">-</div>
+      </div>
+    </section>
+
+    <!-- Bookings Table -->
+    <section class="bg-white rounded-xl shadow p-6">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-xl font-semibold">Latest Bookings</h2>
+        <select id="statusFilter" class="border rounded px-2 py-1">
+          <option value="">All</option>
+          <option>Pending</option>
+          <option>Accepted</option>
+          <option>En route</option>
+          <option>Arrived</option>
+          <option>Completed</option>
+          <option>Cancelled</option>
+        </select>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full text-sm">
+          <thead>
+            <tr class="bg-gray-100 text-left">
+              <th class="p-2">Customer</th>
+              <th class="p-2">Service</th>
+              <th class="p-2">Date</th>
+              <th class="p-2">Status</th>
+              <th class="p-2">Action</th>
+            </tr>
+          </thead>
+          <tbody id="bookingsBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="../shared.js"></script>
+  <script src="./admin.js"></script>
+</body>
+</html>

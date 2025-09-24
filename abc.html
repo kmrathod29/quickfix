@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaflet Map Example</title>
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <style>
+    #map {
+      height: 500px;   /* set map height */
+      width: 100%;     /* full width */
+    }
+  </style>
+</head>
+<body>
+  <h2>My First Leaflet Map 🌍</h2>
+  <div id="map"></div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    // Initialize the map and set its view (latitude, longitude, zoom level)
+    var map = L.map('map').setView([21.7645, 72.1519], 12); // Example: Bhavnagar
+
+    // Load and display tile layer from OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Add a marker
+    var marker = L.marker([21.7645, 72.1519]).addTo(map);
+    marker.bindPopup("<b>Hello!</b><br>This is Bhavnagar.").openPopup();
+  </script>
+</body>
+</html>

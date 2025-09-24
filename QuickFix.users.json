@@ -1,0 +1,402 @@
+[{
+  "_id": {
+    "$oid": "68d27499c850bef9c0c5513c"
+  },
+  "name": "arman mahetar",
+  "email": "afmahetar2006@gmail.com",
+  "passwordHash": "$2b$12$dc0QedM/cb7zbnV077WUHO7I3n.OQnCHVtT.jTFbg38.ny12uodYK",
+  "phone": "09054924231",
+  "role": "user",
+  "isVerified": false,
+  "createdAt": {
+    "$date": "2025-09-23T10:21:13.934Z"
+  },
+  "updatedAt": {
+    "$date": "2025-09-24T06:12:02.617Z"
+  },
+  "__v": 0,
+  "address": "near postoffice",
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      72.1214866,
+      21.7183906
+    ]
+  },
+  "locationUpdatedAt": {
+    "$date": "2025-09-24T06:00:40.384Z"
+  },
+  "isAvailable": true,
+  "serviceRadius": 10
+},
+{
+  "_id": {
+    "$oid": "68d2871efe74c66ad93c0ec4"
+  },
+  "name": "Admin",
+  "email": "admin@quickfix.local",
+  "passwordHash": "$2b$12$RObGxhhQqpJ9buSFQIq0kevjmnscQ0XFfm9hezr2jB8l/qRbYQxm2",
+  "phone": "0000000000",
+  "role": "admin",
+  "isVerified": false,
+  "createdAt": {
+    "$date": "2025-09-23T11:40:14.160Z"
+  },
+  "updatedAt": {
+    "$date": "2025-09-23T11:40:14.160Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68d3a93d9a3639a24c9d080a"
+  },
+  "name": "vahid mahetar",
+  "email": "vahidmahetar001@gmail.com",
+  "passwordHash": "$2b$12$WtMElMFK5iGz13EZ8Kw71uWnLvQrqZUOvtXpvuxqLMhTRWhUmJ9ci",
+  "phone": "9081867144",
+  "role": "user",
+  "isVerified": false,
+  "isAvailable": false,
+  "serviceRadius": 10,
+  "skills": [],
+  "createdAt": {
+    "$date": "2025-09-24T08:18:05.972Z"
+  },
+  "updatedAt": {
+    "$date": "2025-09-24T08:20:49.465Z"
+  },
+  "__v": 0,
+  "address": "bhavnagar gujrat "
+},
+{
+  "_id": {
+    "$oid": "68d3ab4b9a3639a24c9d0852"
+  },
+  "name": "krunal rathod",
+  "email": "kmrathod123@gmail.com",
+  "passwordHash": "$2b$12$WRZrCIfzeA8wtzJOZnRu1.RaqG6B2U3XG2s3rpPTjxngXHTjhnqRW",
+  "phone": "7432145698",
+  "role": "user",
+  "isVerified": false,
+  "isAvailable": true,
+  "serviceRadius": 10,
+  "skills": [],
+  "createdAt": {
+    "$date": "2025-09-24T08:26:51.556Z"
+  },
+  "updatedAt": {
+    "$date": "2025-09-24T08:26:51.556Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68d3c03cd66de9346a031ae6"
+  },
+  "name": "Mahetar Arman",
+  "email": "mahetararman2006@gmail.com",
+  "passwordHash": "$2b$12$/cZPpD6bA832eN/Y1IjO2eL2gcsKvX.bEX7NjSuXJx7LXuppA58FK",
+  "phone": "09054804231",
+  "role": "user",
+  "isVerified": false,
+  "isAvailable": true,
+  "serviceRadius": 10,
+  "skills": [],
+  "createdAt": {
+    "$date": "2025-09-24T09:56:12.500Z"
+  },
+  "updatedAt": {
+    "$date": "2025-09-24T09:56:12.500Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68d3d6e5b080d78c2f200dd6"
+  },
+  "name": "Mike Johnson",
+  "email": "mike.plumber@quickfix.com",
+  "passwordHash": "$2b$12$dP.Y/JW5fzAuHXblRkwvxewnoshUMGk6OfluKrsvV/LWC3U77/ZlO",
+  "phone": "+1-555-0101",
+  "role": "technician",
+  "address": "Downtown District",
+  "isVerified": true,
+  "ratingAverage": 0,
+  "ratingCount": 0,
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      -74.006,
+      40.7128
+    ]
+  },
+  "locationUpdatedAt": {
+    "$date": "2025-09-24T11:32:53.851Z"
+  },
+  "isAvailable": true,
+  "serviceRadius": 15,
+  "skills": [
+    "plumbing",
+    "pipe repairs",
+    "drain cleaning"
+  ],
+  "createdAt": {
+    "$date": "2025-09-24T11:32:53.868Z"
+  },
+  "updatedAt": {
+    "$date": "2025-09-24T11:32:53.868Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68d3d6e6b080d78c2f200dd8"
+  },
+  "name": "Sarah Davis",
+  "email": "sarah.electrician@quickfix.com",
+  "passwordHash": "$2b$12$KS1jCOPu.EMCPT80WTUrVedlSoJ0R.iZwZinaJvu5jtj9lMCmqz3m",
+  "phone": "+1-555-0102",
+  "role": "technician",
+  "address": "Midtown Area",
+  "isVerified": true,
+  "ratingAverage": 0,
+  "ratingCount": 0,
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      -74.007,
+      40.7138
+    ]
+  },
+  "locationUpdatedAt": {
+    "$date": "2025-09-24T11:32:54.227Z"
+  },
+  "isAvailable": true,
+  "serviceRadius": 15,
+  "skills": [
+    "electrical",
+    "wiring",
+    "lighting"
+  ],
+  "createdAt": {
+    "$date": "2025-09-24T11:32:54.230Z"
+  },
+  "updatedAt": {
+    "$date": "2025-09-24T11:32:54.230Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68d3d6e6b080d78c2f200dda"
+  },
+  "name": "David Wilson",
+  "email": "david.carpenter@quickfix.com",
+  "passwordHash": "$2b$12$xBzb7h0RhaWg2obz7ycnuu3TUmKO8StjjbRmMf/WQvkjfhOF.fuTu",
+  "phone": "+1-555-0103",
+  "role": "technician",
+  "address": "East Side",
+  "isVerified": true,
+  "ratingAverage": 0,
+  "ratingCount": 0,
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      -74.005,
+      40.7118
+    ]
+  },
+  "locationUpdatedAt": {
+    "$date": "2025-09-24T11:32:54.581Z"
+  },
+  "isAvailable": true,
+  "serviceRadius": 15,
+  "skills": [
+    "carpentry",
+    "furniture repair",
+    "woodwork"
+  ],
+  "createdAt": {
+    "$date": "2025-09-24T11:32:54.583Z"
+  },
+  "updatedAt": {
+    "$date": "2025-09-24T11:32:54.583Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68d3d6e6b080d78c2f200ddc"
+  },
+  "name": "Lisa Martinez",
+  "email": "lisa.ac@quickfix.com",
+  "passwordHash": "$2b$12$PSpFQrcZnEHmZCMFXhVha.LvIrXVnTE1ssX2j370dXfpXc9Ij487i",
+  "phone": "+1-555-0104",
+  "role": "technician",
+  "address": "West Side",
+  "isVerified": true,
+  "ratingAverage": 0,
+  "ratingCount": 0,
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      -74.008,
+      40.7148
+    ]
+  },
+  "locationUpdatedAt": {
+    "$date": "2025-09-24T11:32:54.934Z"
+  },
+  "isAvailable": true,
+  "serviceRadius": 15,
+  "skills": [
+    "ac",
+    "hvac",
+    "cooling systems"
+  ],
+  "createdAt": {
+    "$date": "2025-09-24T11:32:54.936Z"
+  },
+  "updatedAt": {
+    "$date": "2025-09-24T11:32:54.936Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68d3d6e7b080d78c2f200dde"
+  },
+  "name": "James Brown",
+  "email": "james.painter@quickfix.com",
+  "passwordHash": "$2b$12$erqR6w44A0McDXZSau6Y2eFHmvf8SqaJDBqRrTT/o6gtAd2G8mhlq",
+  "phone": "+1-555-0105",
+  "role": "technician",
+  "address": "North District",
+  "isVerified": true,
+  "ratingAverage": 0,
+  "ratingCount": 0,
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      -74.004,
+      40.7158
+    ]
+  },
+  "locationUpdatedAt": {
+    "$date": "2025-09-24T11:32:55.282Z"
+  },
+  "isAvailable": true,
+  "serviceRadius": 15,
+  "skills": [
+    "painting",
+    "interior design",
+    "wall repair"
+  ],
+  "createdAt": {
+    "$date": "2025-09-24T11:32:55.285Z"
+  },
+  "updatedAt": {
+    "$date": "2025-09-24T11:32:55.285Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68d3d6e7b080d78c2f200de0"
+  },
+  "name": "Emily Chen",
+  "email": "emily.appliance@quickfix.com",
+  "passwordHash": "$2b$12$buD2ZaXkoC8xmjBLp44d0u8vZt8bkRDf52FJdCKL.iYE6jrBF6/JK",
+  "phone": "+1-555-0106",
+  "role": "technician",
+  "address": "South District",
+  "isVerified": true,
+  "ratingAverage": 0,
+  "ratingCount": 0,
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      -74.0055,
+      40.7108
+    ]
+  },
+  "locationUpdatedAt": {
+    "$date": "2025-09-24T11:32:55.633Z"
+  },
+  "isAvailable": true,
+  "serviceRadius": 15,
+  "skills": [
+    "appliance",
+    "refrigeration",
+    "electronics"
+  ],
+  "createdAt": {
+    "$date": "2025-09-24T11:32:55.634Z"
+  },
+  "updatedAt": {
+    "$date": "2025-09-24T11:32:55.634Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68d3d6e7b080d78c2f200de2"
+  },
+  "name": "Robert Taylor",
+  "email": "robert.multi@quickfix.com",
+  "passwordHash": "$2b$12$9AtIaiJ4TNTc4zP4NruIge05o1ZSojnX5rZZ.qeHgKcEqTFQaY.iy",
+  "phone": "+1-555-0107",
+  "role": "technician",
+  "address": "Central Area",
+  "isVerified": true,
+  "ratingAverage": 0,
+  "ratingCount": 0,
+  "location": {
+    "type": "Point",
+    "coordinates": [
+      -74.0065,
+      40.7125
+    ]
+  },
+  "locationUpdatedAt": {
+    "$date": "2025-09-24T11:32:55.981Z"
+  },
+  "isAvailable": true,
+  "serviceRadius": 15,
+  "skills": [
+    "plumbing",
+    "electrical",
+    "general repairs"
+  ],
+  "createdAt": {
+    "$date": "2025-09-24T11:32:55.982Z"
+  },
+  "updatedAt": {
+    "$date": "2025-09-24T11:32:55.982Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68d43025394ec1013df1d14d"
+  },
+  "name": "arman mahetar",
+  "email": "midnightsphere19@gmail.com",
+  "passwordHash": "$2b$12$rpzWH82B.7E0QI4gnd6qDeOSaWitG2a865NScxFdA64MhnBhMsdJy",
+  "phone": "09054924231",
+  "role": "user",
+  "isVerified": false,
+  "ratingAverage": 0,
+  "ratingCount": 0,
+  "isAvailable": true,
+  "serviceRadius": 10,
+  "skills": [],
+  "createdAt": {
+    "$date": "2025-09-24T17:53:41.807Z"
+  },
+  "updatedAt": {
+    "$date": "2025-09-24T17:53:41.807Z"
+  },
+  "__v": 0
+}]

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Technician Dashboard - QuickFix</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css" />
+
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+    }
+
+    function translateLanguage(lang) {
+      var selectField = document.querySelector(".goog-te-combo");
+      if (selectField) {
+        selectField.value = lang;
+        selectField.dispatchEvent(new Event("change"));
+      }
+    }
+
+    function changeLanguage(lang) {
+      let translateElement = document.querySelector('.goog-te-combo');
+      if (translateElement) {
+        translateElement.value = lang;
+        translateElement.dispatchEvent(new Event('change'));
+      } else {
+        alert("Google Translate is not ready yet.");
+      }
+    }
+  </script>
+
+</head>
+
+<body class="bg-gray-50" data-protected="true">
+  <div id="google_translate_element" style="position:absolute; left:-9999px; top:auto; height:0; overflow:hidden">
+  </div>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <h2>QuickFix</h2>
+      </div>
+      <ul class="nav-menu">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="about.html" class="nav-link">About us</a></li>
+        <li><a href="about.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-menu-right">
+        <div class="language-selector-container">
+          <div class="language-selector">
+            <span class="current-language" data-lang="en">
+              <i class="fas fa-globe me-2"></i>
+              EN
+            </span>
+            <div class="language-dropdown">
+              <div class="language-option" data-lang="en" onclick="changeLanguage('en')">English</div>
+              <div class="language-option" data-lang="hi" onclick="changeLanguage('hi')">हिंदी</div>
+              <div class="language-option" data-lang="gu" onclick="changeLanguage('gu')">ગુજરાતી</div>
+            </div>
+          </div>
+        </div>
+        <!-- <button class="nav-auth-btn login-btn" onclick="openRoleSelectModal('login')">
+                        Login
+                        <svg xmlns="http://www.w3.org/2000/svg" class="login-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                        <i class="ri-login-box-line"></i>
+                    </button> -->
+
+        <button class="nav-auth-btn login-btn flex items-center gap-2 px-4 py-2" onclick="openRoleSelectModal('login')">
+          Login
+          <i class="ri-login-box-line text-xl"></i>
+        </button>
+      </div>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mx-auto px-4 pt-24 pb-16">
+    <h1 class="text-3xl font-bold mb-8">Technician Dashboard</h1>
+
+    <!-- Summary Cards -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      <div class="bg-white p-6 rounded-xl shadow">
+        <div class="text-sm text-gray-500">Total Jobs</div>
+        <div class="text-3xl font-bold" id="sumTotal">-</div>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow">
+        <div class="text-sm text-gray-500">Pending</div>
+        <div class="text-3xl font-bold" id="sumPending">-</div>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow">
+        <div class="text-sm text-gray-500">Completed</div>
+        <div class="text-3xl font-bold" id="sumCompleted">-</div>
+      </div>
+    </section>
+
+    <!-- Location Management Section -->
+    <section class="bg-white rounded-xl shadow p-6 mb-10">
+      <h2 class="text-xl font-semibold mb-4">Location & Availability</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Location Status -->
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-lg font-medium">Current Location</h3>
+            <span id="locationStatus"
+              class="px-3 py-1 rounded-full text-sm font-semibold bg-gray-100 text-gray-800">Unknown</span>
+          </div>
+          <div id="locationInfo" class="text-sm text-gray-600">
+            <p id="locationText">Location not set</p>
+            <p id="locationUpdated" class="text-xs text-gray-400 mt-1"></p>
+          </div>
+          <div class="flex gap-2">
+            <button id="updateLocationBtn" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+              📍 Update Location
+            </button>
+            <button id="autoUpdateBtn" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+              🔄 Auto Update
+            </button>
+          </div>
+        </div>
+
+        <!-- Availability Settings -->
+        <div class="space-y-4">
+          <h3 class="text-lg font-medium">Availability Settings</h3>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <label class="text-sm font-medium text-gray-700">Available for Jobs</label>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="availabilityToggle" class="sr-only peer">
+                <div
+                  class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600">
+                </div>
+              </label>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Service Radius (km)</label>
+              <input type="range" id="radiusSlider" min="1" max="50" value="10" class="w-full">
+              <div class="flex justify-between text-xs text-gray-500 mt-1">
+                <span>1 km</span>
+                <span id="radiusValue">10 km</span>
+                <span>50 km</span>
+              </div>
+            </div>
+            <button id="saveSettingsBtn" class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700">
+              Save Settings
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Jobs Table -->
+    <section class="bg-white rounded-xl shadow p-6">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-xl font-semibold">Assigned Jobs</h2>
+        <select id="statusFilter" class="border rounded px-2 py-1">
+          <option value="">All</option>
+          <option>Pending</option>
+          <option>Accepted</option>
+          <option>En route</option>
+          <option>Arrived</option>
+          <option>Completed</option>
+          <option>Cancelled</option>
+        </select>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full text-sm">
+          <thead>
+            <tr class="bg-gray-100 text-left">
+              <th class="p-2">Customer</th>
+              <th class="p-2">Service</th>
+              <th class="p-2">Date</th>
+              <th class="p-2">Status</th>
+              <th class="p-2">Action</th>
+            </tr>
+          </thead>
+          <tbody id="jobsBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script type="text/javascript"
+    src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script src="../shared.js"></script>
+  <script src="../geolocation.js"></script>
+  <script src="./technician.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Registration Form with Skills Selection</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .skill-category {
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-category.expanded {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .skill-checkbox {
+            transform: scale(1.1);
+            margin-right: 8px;
+        }
+        
+        .selected-skills-badge {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-left: 8px;
+            min-width: 20px;
+            text-align: center;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-content {
+            position: relative;
+            background-color: white;
+            margin: 2% auto;
+            padding: 20px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: #000;
+        }
+        
+        .skill-item {
+            transition: all 0.2s ease;
+        }
+        
+        .skill-item:hover {
+            background-color: #f3f4f6;
+            padding-left: 8px;
+        }
+        
+        .search-input {
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 10;
+        }
+        
+        .popular-skills {
+            background: linear-gradient(135deg, #fef3c7, #fbbf24);
+            border: 2px solid #f59e0b;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .category-stats {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-top: 8px;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-in {
+            animation: slideIn 0.3s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+<!-- Demo Registration Form -->
+<div class="min-h-screen py-8">
+    <div class="max-w-4xl mx-auto px-4">
+        <div class="bg-white rounded-xl shadow-lg p-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Create Your Account</h1>
+            <p class="text-gray-600 mb-8">Join QuickFix to connect with customers or find skilled technicians</p>
+            
+            <form id="registrationForm" class="space-y-6">
+                <!-- Basic Information -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                        <input type="text" id="name" required 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="Enter your full name">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                        <input type="email" id="email" required 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="your@email.com">
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                        <input type="tel" id="phone" required 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="+91 98765 43210">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Account Type</label>
+                        <select id="role" required onchange="toggleSkillsSection()" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="">Select Account Type</option>
+                            <option value="user">👤 Customer (I need services)</option>
+                            <option value="technician">🛠️ Technician (I provide services)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                        <input type="password" id="password" required 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="Create a strong password">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
+                        <input type="password" id="confirmPassword" required 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="Confirm your password">
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Address</label>
+                    <textarea id="address" rows="2" 
+                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                              placeholder="Enter your complete address"></textarea>
+                </div>
+
+                <!-- Skills Section for Technicians -->
+                <div id="skillsSection" class="hidden animate-in">
+                    <div class="border-t pt-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <div>
+                                <h2 class="text-2xl font-bold text-gray-900">Select Your Skills</h2>
+                                <p class="text-gray-600">Choose the services you can provide to help customers find you</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-sm text-gray-500">Selected: </span>
+                                <span id="selectedCount" class="font-bold text-blue-600">0</span>
+                                <span class="text-sm text-gray-500"> skills</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Search and Filter -->
+                        <div class="mb-6">
+                            <div class="relative">
+                                <input type="text" id="skillSearch" 
+                                       class="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                       placeholder="Search for skills... (e.g., electrical, plumbing, carpentry)">
+                                <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            </div>
+                        </div>
+
+                        <!-- Popular Skills Section -->
+                        <div class="popular-skills mb-8">
+                            <div class="flex items-center mb-3">
+                                <i class="fas fa-star text-yellow-600 mr-2"></i>
+                                <h3 class="font-semibold text-gray-900">Popular Skills</h3>
+                            </div>
+                            <p class="text-sm text-gray-700 mb-4">Most requested services - quick select these common skills:</p>
+                            <div id="popularSkills" class="grid grid-cols-2 md:grid-cols-4 gap-3"></div>
+                        </div>
+
+                        <!-- Skills Categories -->
+                        <div id="skillsContainer" class="space-y-4"></div>
+                        
+                        <!-- Selected Skills Summary -->
+                        <div id="selectedSkillsPreview" class="mt-6 p-4 bg-blue-50 rounded-lg hidden">
+                            <h4 class="font-medium text-blue-900 mb-2">Selected Skills:</h4>
+                            <div id="selectedSkillsList" class="flex flex-wrap gap-2"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Terms and Submit -->
+                <div class="border-t pt-6">
+                    <div class="flex items-center mb-6">
+                        <input type="checkbox" id="terms" required class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                        <label for="terms" class="ml-2 text-sm text-gray-700">
+                            I agree to the <a href="#" class="text-blue-600 hover:underline">Terms of Service</a> and 
+                            <a href="#" class="text-blue-600 hover:underline">Privacy Policy</a>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" 
+                            class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition-colors focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                        <i class="fas fa-user-plus mr-2"></i>
+                        Create My Account
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Success Message (Initially Hidden) -->
+<div id="successMessage" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center">
+    <div class="bg-white p-8 rounded-xl max-w-md mx-4 text-center">
+        <div class="text-green-600 text-6xl mb-4">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Registration Successful!</h3>
+        <p class="text-gray-600 mb-4">Your account has been created successfully.</p>
+        <button onclick="closeSuccessMessage()" 
+                class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+            Continue
+        </button>
+    </div>
+</div>
+
+<script>
+// Skills data (this should come from your API in production)
+const skillsData = {
+    ELECTRICAL: {
+        name: 'Electrical',
+        icon: 'fas fa-bolt',
+        description: 'Electrical installations, repairs, and maintenance',
+        skills: [
+            'electrical wiring', 'electrical repair', 'switch and socket installation',
+            'ceiling fan installation', 'lighting installation', 'electrical troubleshooting',
+            'circuit breaker repair', 'electrical panel upgrade', 'outdoor lighting',
+            'electrical safety inspection'
+        ]
+    },
+    PLUMBING: {
+        name: 'Plumbing',
+        icon: 'fas fa-wrench',
+        description: 'Plumbing installations, repairs, and maintenance',
+        skills: [
+            'pipe repair', 'drain cleaning', 'faucet installation', 'toilet repair',
+            'water heater repair', 'bathroom fitting', 'kitchen plumbing', 'pipe installation',
+            'leak detection', 'sewer line repair', 'water pressure issues', 'plumbing maintenance'
+        ]
+    },
+    AC_HVAC: {
+        name: 'AC & HVAC',
+        icon: 'fas fa-snowflake',
+        description: 'Air conditioning and heating system services',
+        skills: [
+            'ac repair', 'ac installation', 'ac maintenance', 'hvac repair',
+            'refrigerator repair', 'air conditioner cleaning', 'ac gas refilling',
+            'central air conditioning', 'split ac service', 'window ac repair',
+            'heat pump repair', 'thermostat installation'
+        ]
+    },
+    CARPENTRY: {
+        name: 'Carpentry',
+        icon: 'fas fa-hammer',
+        description: 'Wood work, furniture assembly, and carpentry services',
+        skills: [
+            'furniture assembly', 'door installation', 'window installation',
+            'cabinet installation', 'shelving installation', 'flooring installation',
+            'custom furniture', 'wood repair', 'deck construction', 'trim installation',
+            'furniture repair', 'wooden framework'
+        ]
+    },
+    PAINTING: {
+        name: 'Painting',
+        icon: 'fas fa-paint-brush',
+        description: 'Interior and exterior painting services',
+        skills: [
+            'interior painting', 'exterior painting', 'wall painting', 'ceiling painting',
+            'furniture painting', 'texture painting', 'spray painting', 'wallpaper installation',
+            'wall preparation', 'color consultation', 'decorative painting', 'paint removal'
+        ]
+    },
+    APPLIANCE_REPAIR: {
+        name: 'Appliance Repair',
+        icon: 'fas fa-tools',
+        description: 'Home appliance repair and maintenance',
+        skills: [
+            'washing machine repair', 'dishwasher repair', 'microwave repair', 'oven repair',
+            'refrigerator repair', 'dryer repair', 'garbage disposal repair', 'water heater repair',
+            'small appliance repair', 'appliance installation', 'appliance maintenance', 'vacuum cleaner repair'
+        ]
+    },
+    CLEANING: {
+        name: 'Cleaning',
+        icon: 'fas fa-broom',
+        description: 'Professional cleaning and maintenance services',
+        skills: [
+            'house cleaning', 'deep cleaning', 'carpet cleaning', 'window cleaning',
+            'office cleaning', 'post-construction cleaning', 'move-in/move-out cleaning',
+            'pressure washing', 'upholstery cleaning', 'floor cleaning', 'bathroom cleaning', 'kitchen cleaning'
+        ]
+    },
+    GARDENING: {
+        name: 'Gardening & Landscaping',
+        icon: 'fas fa-leaf',
+        description: 'Garden maintenance and landscaping services',
+        skills: [
+            'lawn mowing', 'garden maintenance', 'tree trimming', 'landscaping',
+            'plant installation', 'irrigation system', 'hedge trimming', 'weed removal',
+            'soil preparation', 'garden design', 'pest control', 'seasonal cleanup'
+        ]
+    },
+    HANDYMAN: {
+        name: 'General Handyman',
+        icon: 'fas fa-toolbox',
+        description: 'General maintenance and repair services',
+        skills: [
+            'general repairs', 'home maintenance', 'fixture installation', 'drywall repair',
+            'caulking', 'weatherproofing', 'minor electrical work', 'minor plumbing work',
+            'assembly services', 'mounting services', 'general troubleshooting', 'maintenance checks'
+        ]
+    },
+    PEST_CONTROL: {
+        name: 'Pest Control',
+        icon: 'fas fa-bug',
+        description: 'Pest identification, elimination, and prevention services',
+        skills: [
+            'termite control', 'cockroach control', 'ant control', 'rodent control',
+            'bed bug treatment', 'mosquito control', 'fly control', 'general pest control',
+            'fumigation', 'pest inspection', 'preventive treatment', 'organic pest control'
+        ]
+    }
+};
+
+const popularSkills = [
+    'electrical repair', 'plumbing repair', 'ac repair', 'house cleaning',
+    'furniture assembly', 'interior painting', 'general repairs', 'appliance repair'
+];
+
+let selectedSkills = new Set();
+
+// Toggle skills section visibility based on role selection
+function toggleSkillsSection() {
+    const role = document.getElementById('role').value;
+    const skillsSection = document.getElementById('skillsSection');
+    
+    if (role === 'technician') {
+        skillsSection.classList.remove('hidden');
+        loadSkills();
+    } else {
+        skillsSection.classList.add('hidden');
+        selectedSkills.clear();
+        updateSelectedCount();
+    }
+}
+
+// Load and display skills
+function loadSkills() {
+    displayPopularSkills();
+    displaySkillCategories();
+    setupSearch();
+}
+
+// Display popular skills
+function displayPopularSkills() {
+    const container = document.getElementById('popularSkills');
+    container.innerHTML = '';
+    
+    popularSkills.forEach(skill => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'bg-white border-2 border-yellow-400 text-yellow-800 px-3 py-2 rounded-lg text-sm font-medium hover:bg-yellow-50 transition-colors';
+        button.innerHTML = `<i class="fas fa-star mr-1"></i>${skill}`;
+        button.onclick = () => toggleSkill(skill, button);
+        container.appendChild(button);
+    });
+}
+
+// Display skill categories
+function displaySkillCategories() {
+    const container = document.getElementById('skillsContainer');
+    container.innerHTML = '';
+    
+    Object.entries(skillsData).forEach(([key, category]) => {
+        const categoryDiv = document.createElement('div');
+        categoryDiv.className = 'skill-category p-6';
+        
+        const selectedInCategory = category.skills.filter(skill => selectedSkills.has(skill)).length;
+        
+        categoryDiv.innerHTML = `
+            <div class="cursor-pointer" onclick="toggleCategory('${key}')">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <i class="${category.icon} text-2xl text-blue-600 mr-4"></i>
+                        <div>
+                            <h3 class="font-semibold text-lg text-gray-900">${category.name}</h3>
+                            <p class="text-gray-600 text-sm">${category.description}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        ${selectedInCategory > 0 ? `<span class="selected-skills-badge">${selectedInCategory}</span>` : ''}
+                        <i class="fas fa-chevron-down ml-2 transition-transform duration-200" id="chevron-${key}"></i>
+                    </div>
+                </div>
+                <div class="category-stats">
+                    ${category.skills.length} skills available
+                </div>
+            </div>
+            <div id="skills-${key}" class="skills-list mt-4 hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    ${category.skills.map(skill => `
+                        <label class="skill-item flex items-center p-3 rounded-lg border hover:bg-gray-50 cursor-pointer">
+                            <input type="checkbox" class="skill-checkbox text-blue-600" 
+                                   onchange="toggleSkillFromCheckbox('${skill}', this)"
+                                   ${selectedSkills.has(skill) ? 'checked' : ''}>
+                            <span class="text-gray-700">${skill}</span>
+                        </label>
+                    `).join('')}
+                </div>
+                <div class="mt-4 pt-3 border-t">
+                    <button type="button" onclick="selectAllInCategory('${key}')" 
+                            class="text-blue-600 hover:text-blue-800 text-sm font-medium mr-4">
+                        Select All
+                    </button>
+                    <button type="button" onclick="clearCategorySelection('${key}')" 
+                            class="text-red-600 hover:text-red-800 text-sm font-medium">
+                        Clear Selection
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        container.appendChild(categoryDiv);
+    });
+}
+
+// Toggle category expansion
+function toggleCategory(categoryKey) {
+    const skillsList = document.getElementById(`skills-${categoryKey}`);
+    const chevron = document.getElementById(`chevron-${categoryKey}`);
+    const categoryDiv = skillsList.closest('.skill-category');
+    
+    if (skillsList.classList.contains('hidden')) {
+        skillsList.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+        categoryDiv.classList.add('expanded');
+    } else {
+        skillsList.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+        categoryDiv.classList.remove('expanded');
+    }
+}
+
+// Toggle individual skill
+function toggleSkill(skill, buttonElement = null) {
+    if (selectedSkills.has(skill)) {
+        selectedSkills.delete(skill);
+        if (buttonElement) buttonElement.classList.remove('bg-blue-600', 'text-white');
+    } else {
+        selectedSkills.add(skill);
+        if (buttonElement) {
+            buttonElement.classList.add('bg-blue-600', 'text-white');
+            buttonElement.classList.remove('bg-white', 'text-yellow-800');
+        }
+    }
+    
+    updateSelectedCount();
+    updateSkillsPreview();
+    updateCategoryBadges();
+}
+
+// Toggle skill from checkbox
+function toggleSkillFromCheckbox(skill, checkbox) {
+    if (checkbox.checked) {
+        selectedSkills.add(skill);
+    } else {
+        selectedSkills.delete(skill);
+    }
+    
+    updateSelectedCount();
+    updateSkillsPreview();
+    updateCategoryBadges();
+}
+
+// Select all skills in a category
+function selectAllInCategory(categoryKey) {
+    const category = skillsData[categoryKey];
+    category.skills.forEach(skill => selectedSkills.add(skill));
+    
+    // Update checkboxes
+    const checkboxes = document.querySelectorAll(`#skills-${categoryKey} input[type="checkbox"]`);
+    checkboxes.forEach(cb => cb.checked = true);
+    
+    updateSelectedCount();
+    updateSkillsPreview();
+    updateCategoryBadges();
+}
+
+// Clear category selection
+function clearCategorySelection(categoryKey) {
+    const category = skillsData[categoryKey];
+    category.skills.forEach(skill => selectedSkills.delete(skill));
+    
+    // Update checkboxes
+    const checkboxes = document.querySelectorAll(`#skills-${categoryKey} input[type="checkbox"]`);
+    checkboxes.forEach(cb => cb.checked = false);
+    
+    updateSelectedCount();
+    updateSkillsPreview();
+    updateCategoryBadges();
+}
+
+// Update selected count
+function updateSelectedCount() {
+    document.getElementById('selectedCount').textContent = selectedSkills.size;
+}
+
+// Update skills preview
+function updateSkillsPreview() {
+    const preview = document.getElementById('selectedSkillsPreview');
+    const list = document.getElementById('selectedSkillsList');
+    
+    if (selectedSkills.size > 0) {
+        preview.classList.remove('hidden');
+        list.innerHTML = Array.from(selectedSkills).map(skill => 
+            `<span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+                ${skill}
+                <button type="button" onclick="removeSkill('${skill}')" class="ml-2 text-blue-600 hover:text-blue-800">×</button>
+            </span>`
+        ).join('');
+    } else {
+        preview.classList.add('hidden');
+    }
+}
+
+// Remove skill from preview
+function removeSkill(skill) {
+    selectedSkills.delete(skill);
+    
+    // Update checkbox if visible
+    const checkbox = document.querySelector(`input[onchange*="'${skill}'"]`);
+    if (checkbox) checkbox.checked = false;
+    
+    updateSelectedCount();
+    updateSkillsPreview();
+    updateCategoryBadges();
+}
+
+// Update category badges
+function updateCategoryBadges() {
+    Object.entries(skillsData).forEach(([key, category]) => {
+        const selectedInCategory = category.skills.filter(skill => selectedSkills.has(skill)).length;
+        const categoryDiv = document.querySelector(`#skills-${key}`).closest('.skill-category');
+        
+        // Update badge
+        const existingBadge = categoryDiv.querySelector('.selected-skills-badge');
+        if (existingBadge) existingBadge.remove();
+        
+        if (selectedInCategory > 0) {
+            const badge = document.createElement('span');
+            badge.className = 'selected-skills-badge';
+            badge.textContent = selectedInCategory;
+            
+            const chevron = document.getElementById(`chevron-${key}`);
+            chevron.parentElement.insertBefore(badge, chevron);
+        }
+    });
+}
+
+// Setup search functionality
+function setupSearch() {
+    const searchInput = document.getElementById('skillSearch');
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        filterSkills(query);
+    });
+}
+
+// Filter skills based on search
+function filterSkills(query) {
+    if (!query) {
+        // Show all categories
+        Object.keys(skillsData).forEach(key => {
+            const categoryDiv = document.querySelector(`#skills-${key}`).closest('.skill-category');
+            categoryDiv.style.display = 'block';
+            
+            // Show all skills within categories
+            const skillItems = categoryDiv.querySelectorAll('.skill-item');
+            skillItems.forEach(item => item.style.display = 'flex');
+        });
+        return;
+    }
+
+    Object.entries(skillsData).forEach(([key, category]) => {
+        const categoryDiv = document.querySelector(`#skills-${key}`).closest('.skill-category');
+        const skillItems = categoryDiv.querySelectorAll('.skill-item');
+        
+        let categoryHasMatches = false;
+        
+        // Check if category name matches
+        if (category.name.toLowerCase().includes(query)) {
+            categoryHasMatches = true;
+            skillItems.forEach(item => item.style.display = 'flex');
+        } else {
+            // Check individual skills
+            skillItems.forEach(item => {
+                const skillName = item.querySelector('span').textContent.toLowerCase();
+                if (skillName.includes(query)) {
+                    item.style.display = 'flex';
+                    categoryHasMatches = true;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+        
+        categoryDiv.style.display = categoryHasMatches ? 'block' : 'none';
+    });
+}
+
+// Form submission
+document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        password: document.getElementById('password').value,
+        role: document.getElementById('role').value,
+        address: document.getElementById('address').value,
+        skills: Array.from(selectedSkills)
+    };
+    
+    // Validate passwords match
+    if (formData.password !== document.getElementById('confirmPassword').value) {
+        alert('Passwords do not match!');
+        return;
+    }
+    
+    // Validate technician has selected skills
+    if (formData.role === 'technician' && formData.skills.length === 0) {
+        alert('Please select at least one skill for your technician account.');
+        return;
+    }
+    
+    try {
+        // This would be your API call in production
+        console.log('Registration data:', formData);
+        
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // Show success message
+        document.getElementById('successMessage').classList.remove('hidden');
+        document.getElementById('successMessage').classList.add('flex');
+        
+        // Reset form
+        this.reset();
+        selectedSkills.clear();
+        updateSelectedCount();
+        updateSkillsPreview();
+        document.getElementById('skillsSection').classList.add('hidden');
+        
+    } catch (error) {
+        alert('Registration failed. Please try again.');
+        console.error('Registration error:', error);
+    }
+});
+
+// Close success message
+function closeSuccessMessage() {
+    document.getElementById('successMessage').classList.add('hidden');
+    document.getElementById('successMessage').classList.remove('flex');
+}
+</script>
+
+</body>
+</html>

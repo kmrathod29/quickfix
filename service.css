@@ -241,7 +241,7 @@
       text-align: center;
   } */
 
-  .hero {
+  .service-hero {
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -253,7 +253,7 @@
       color: white;
   }
 
-  .hero::before {
+  .service-hero::before {
       content: "";
       position: absolute;
       top: 0;
@@ -263,7 +263,7 @@
       background: rgba(0, 0, 0, 0.5);
   }
 
-  .hero .container {
+  .service-hero .container {
       position: relative;
       z-index: 2;
       max-width: 700px;
@@ -271,7 +271,7 @@
   }
 
 
-  .hero h1 {
+  .service-hero h1 {
       font-size: 3.5rem;
       font-weight: bold;
       margin-bottom: 20px;
@@ -279,7 +279,7 @@
       color: #fff;
   }
 
-  .hero .highlight {
+  .service-hero .highlight {
       /* background: linear-gradient(135deg, #3b82f6, #10b981); */
       color: white;
       /* -webkit-background-clip: text; */
@@ -287,7 +287,7 @@
       /* background-clip: text; */
   }
 
-  .hero p {
+  .service-hero p {
       font-size: 1.25rem;
       /* color: #6b7280; */
       color: #fff;

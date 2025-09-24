@@ -1,20 +1,20 @@
-
+// Combined QuickFix JavaScript functionality
 // Mobile menu toggle and splash screen functionality
 document.addEventListener("DOMContentLoaded", function () {
   // Show splash screen
   let currentScreen = "splash";
 
   // Check if this is the first visit
-  const isFirstVisit = !localStorage.getItem("quickfix-visited");
+  const isFirstVisit = !getStorageItem("quickfix-visited");
 
   // Prevent background scroll while splash/welcome are visible
   document.body.style.overflow = "hidden";
 
   if (isFirstVisit) {
-    //     // First visit - show splash and welcome screens
-    localStorage.setItem("quickfix-visited", "true");
+    // First visit - show splash and welcome screens
+    setStorageItem("quickfix-visited", "true");
 
-    //     // Transition from splash to welcome after 3 seconds
+    // Transition from splash to welcome after 3 seconds
     setTimeout(() => {
       showWelcome();
     }, 3000);
@@ -107,21 +107,25 @@ document.addEventListener("DOMContentLoaded", function () {
     const navMenu = document.querySelector(".nav-menu");
     const navMenuRight = document.querySelector(".nav-menu-right");
 
-    if (hamburger && navMenu && navMenuRight) {
+    if (hamburger && navMenu) {
       hamburger.addEventListener("click", function () {
         hamburger.classList.toggle("active");
         navMenu.classList.toggle("active");
-        navMenuRight.classList.toggle("active");
+        if (navMenuRight) {
+          navMenuRight.classList.toggle("active");
+        }
       });
 
       // Close mobile menu when clicking on a link
       const navLinks = document.querySelectorAll(".nav-link");
       navLinks.forEach((n) =>
         n.addEventListener("click", () => {
-          if (hamburger && navMenu && navMenuRight) {
+          if (hamburger && navMenu) {
             hamburger.classList.remove("active");
             navMenu.classList.remove("active");
-            navMenuRight.classList.remove("active");
+            if (navMenuRight) {
+              navMenuRight.classList.remove("active");
+            }
           }
         })
       );
@@ -134,7 +138,144 @@ document.addEventListener("DOMContentLoaded", function () {
   } catch (error) {
     console.warn("Could not set up mobile menu:", error);
   }
+
+  // Render auth UI (login button vs user initials avatar)
+  renderAuthUI();
+
+  // Protect Services link: if not logged in, show notification
+  const servicesLink = document.querySelector('a[href="service.html"]');
+  if (servicesLink) {
+    servicesLink.addEventListener("click", function (e) {
+      console.log("Services link clicked, token status:", !!getToken());
+      if (!getToken()) {
+        e.preventDefault();
+        showNotification("Please login to view Services.", "info");
+        // Open role select modal instead of redirecting
+        openRoleSelectModal('login');
+      }
+    });
+  } else {
+    console.warn("Services link not found!");
+  }
 });
+
+// ---------------- Auth helpers (frontend) ----------------
+function getStorageItem(key) {
+  try {
+    return localStorage.getItem(key);
+  } catch (_) {
+    return null;
+  }
+}
+
+function setStorageItem(key, value) {
+  try {
+    localStorage.setItem(key, value);
+  } catch (_) {
+    // Silent fail for environments without localStorage
+  }
+}
+
+function getToken() {
+  return getStorageItem("quickfix-token");
+}
+
+function getUser() {
+  try {
+    return JSON.parse(getStorageItem("quickfix-user") || "null");
+  } catch (_) {
+    return null;
+  }
+}
+
+function getInitials(name) {
+  if (!name || typeof name !== "string") return "U";
+  const parts = name.trim().split(/\s+/);
+  const first = parts[0]?.[0] || "";
+  const last = parts.length > 1 ? parts[parts.length - 1][0] : "";
+  return (first + last).toUpperCase() || first.toUpperCase() || "U";
+}
+
+function renderAuthUI() {
+  const navMenu = document.querySelector(".nav-menu");
+  if (!navMenu) return;
+
+  const loginBtn = document.querySelector(".nav-auth-btn.login-btn");
+  const token = getToken();
+  const user = getUser();
+
+  function ensureDashboardLink(role) {
+    const existing = document.getElementById("nav-dashboard-link");
+    const path =
+      role === "admin"
+        ? "admin/index.html"
+        : role === "technician"
+        ? "technician/dashboard.html"
+        : "user/dashboard.html";
+    if (!existing) {
+      const li = document.createElement("li");
+      li.id = "nav-dashboard-link";
+      li.innerHTML = `<a class="nav-link" href="${path}">Dashboard</a>`;
+      navMenu.appendChild(li);
+    } else {
+      const a = existing.querySelector("a");
+      if (a) a.setAttribute("href", path);
+    }
+  }
+
+     // If logged in: hide login button and show avatar with dropdown
+     if (token && user) {
+      if (loginBtn && loginBtn.parentElement) {
+          loginBtn.parentElement.style.display = 'none';
+      }
+      ensureDashboardLink(user.role || 'user');
+      if (!document.getElementById('nav-user-menu')) {
+          const li = document.createElement('li');
+          li.id = 'nav-user-menu';
+          li.style.position = 'relative';
+          li.innerHTML = `
+              <button id="avatarBtn" class="w-9 h-9 rounded-full bg-blue-600 text-white font-semibold flex items-center justify-center" title="Account">
+                  ${getInitials(user.name || user.email || 'U')}
+              </button>
+              <div id="avatarMenu" class="hidden absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg border">
+                  <a href="#" id="logoutBtn" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
+              </div>`;
+          navMenu.appendChild(li);
+
+          const avatarBtn = li.querySelector('#avatarBtn');
+          const avatarMenu = li.querySelector('#avatarMenu');
+          const logoutBtn = li.querySelector('#logoutBtn');
+          avatarBtn.addEventListener('click', function(){
+              avatarMenu.classList.toggle('hidden');
+          });
+          document.addEventListener('click', function(e){
+              if (!li.contains(e.target)) {
+                  avatarMenu.classList.add('hidden');
+              }
+          });
+          logoutBtn.addEventListener('click', function(e){
+              e.preventDefault();
+              try {
+                  localStorage.removeItem('quickfix-token');
+                  localStorage.removeItem('quickfix-user');
+                  localStorage.removeItem('quickfix-role');
+              } catch(_){ }
+              // Redirect to homepage to avoid 404s when logging out from nested routes
+              window.location.href = 'index.html';
+          });
+      }
+  } else {
+      // Not logged in: show login button; remove avatar if present
+      if (loginBtn && loginBtn.parentElement) {
+          loginBtn.parentElement.style.display = '';
+      }
+      const existed = document.getElementById('nav-user-menu');
+      if (existed && existed.parentElement) existed.parentElement.removeChild(existed);
+      const dash = document.getElementById('nav-dashboard-link');
+      if (dash && dash.parentElement) dash.parentElement.removeChild(dash);
+  }
+}
+ 
 
 // Smooth scrolling for navigation links
 function scrollToSection(sectionId) {
@@ -149,12 +290,14 @@ function scrollToSection(sectionId) {
 // Add scroll event listener for navbar
 window.addEventListener("scroll", function () {
   const navbar = document.querySelector(".navbar");
-  if (window.scrollY > 50) {
-    navbar.style.background = "rgba(255, 255, 255, 0.98)";
-    navbar.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.15)";
-  } else {
-    navbar.style.background = "rgba(255, 255, 255, 0.95)";
-    navbar.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.1)";
+  if (navbar) {
+    if (window.scrollY > 50) {
+      navbar.style.background = "rgba(255, 255, 255, 0.98)";
+      navbar.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.15)";
+    } else {
+      navbar.style.background = "rgba(255, 255, 255, 0.95)";
+      navbar.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.1)";
+    }
   }
 });
 
@@ -163,68 +306,89 @@ let pendingAuthAction = null; // 'login' | 'signup' | null
 
 function openRoleSelectModal(action) {
   pendingAuthAction = action;
-  const modal = document.getElementById("roleSelectModal");
+  const modalId =
+    action === "login" ? "roleSelectLoginModal" : "roleSelectSignupModal";
+  const modal = document.getElementById(modalId);
   if (modal) {
     modal.style.display = "block";
     document.body.style.overflow = "hidden";
   }
 }
-function closeRoleSelectModal() {
-  const modal = document.getElementById("roleSelectModal");
+
+function closeRoleSelectLoginModal() {
+  const modal = document.getElementById("roleSelectLoginModal");
   if (modal) {
     modal.style.display = "none";
-    // only re-enable scroll if no other modal is open
-    const anyOpen = ["bookingModal", "loginModal", "signupModal"].some((id) => {
-      const el = document.getElementById(id);
-      return el && el.style.display === "block";
-    });
-    if (!anyOpen) document.body.style.overflow = "auto";
+    document.body.style.overflow = "auto";
   }
 }
+
+function closeRoleSelectSignupModal() {
+  const modal = document.getElementById("roleSelectSignupModal");
+  if (modal) {
+    modal.style.display = "none";
+    document.body.style.overflow = "auto";
+  }
+}
+
 function proceedWithRoleSelection(role) {
-  try {
-    localStorage.setItem("quickfix-role", role);
-  } catch (_) {}
-  closeRoleSelectModal();
+  setStorageItem("quickfix-role", role);
+
+  // Close the correct modal
   if (pendingAuthAction === "login") {
+    closeRoleSelectLoginModal();
     openLoginModal();
   } else if (pendingAuthAction === "signup") {
+    closeRoleSelectSignupModal();
     openSignupModal();
   }
+
   pendingAuthAction = null;
 }
 
 function openBookingModal() {
-  document.getElementById("bookingModal").style.display = "block";
-  document.body.style.overflow = "hidden";
+  // Require login before booking
+  if (!getToken()) {
+    showNotification("Please login to book a service.", "info");
+    window.location.href = "login.html";
+    return;
+  }
+  const modal = document.getElementById("bookingModal");
+  if (modal) {
+    modal.style.display = "block";
+    document.body.style.overflow = "hidden";
+  }
 }
 
 function closeBookingModal() {
-  document.getElementById("bookingModal").style.display = "none";
-  document.body.style.overflow = "auto";
+  const modal = document.getElementById("bookingModal");
+  if (modal) {
+    modal.style.display = "none";
+    document.body.style.overflow = "auto";
+  }
 }
 
 // Close modal when clicking outside
 window.addEventListener("click", function (event) {
-  const modal = document.getElementById("bookingModal");
-  if (event.target === modal) {
-    closeBookingModal();
-  }
+  const modals = [
+    "bookingModal",
+    "loginModal",
+    "signupModal",
+    "roleSelectLoginModal",
+    "roleSelectSignupModal",
+  ];
 
-  const loginModal = document.getElementById("loginModal");
-  if (event.target === loginModal) {
-    closeLoginModal();
-  }
-
-  const signupModal = document.getElementById("signupModal");
-  if (event.target === signupModal) {
-    closeSignupModal();
-  }
-
-  const roleModal = document.getElementById("roleSelectModal");
-  if (event.target === roleModal) {
-    closeRoleSelectModal();
-  }
+  modals.forEach((modalId) => {
+    const modal = document.getElementById(modalId);
+    if (modal && event.target === modal) {
+      if (modalId === "bookingModal") closeBookingModal();
+      else if (modalId === "loginModal") closeLoginModal();
+      else if (modalId === "signupModal") closeSignupModal();
+      else if (modalId === "roleSelectLoginModal") closeRoleSelectLoginModal();
+      else if (modalId === "roleSelectSignupModal")
+        closeRoleSelectSignupModal();
+    }
+  });
 });
 
 // Close modal with Escape key
@@ -233,36 +397,67 @@ document.addEventListener("keydown", function (event) {
     closeBookingModal();
     closeLoginModal();
     closeSignupModal();
+    closeRoleSelectModal();
   }
 });
 
 // Login Modal Functions
 function openLoginModal() {
-  document.getElementById("loginModal").style.display = "block";
-  document.body.style.overflow = "hidden";
+  const modal = document.getElementById("loginModal");
+  if (modal) {
+    modal.style.display = "block";
+    document.body.style.overflow = "hidden";
+  }
 }
 
 function closeLoginModal() {
-  document.getElementById("loginModal").style.display = "none";
-  document.body.style.overflow = "auto";
+  const modal = document.getElementById("loginModal");
+  if (modal) {
+    modal.style.display = "none";
+    document.body.style.overflow = "auto";
+  }
 }
 
 // Signup Modal Functions
 function openSignupModal() {
-  document.getElementById("signupModal").style.display = "block";
-  document.body.style.overflow = "hidden";
+  const modal = document.getElementById("signupModal");
+  if (modal) {
+    modal.style.display = "block";
+    document.body.style.overflow = "hidden";
+
+    // If signing up as technician, render skills selector
+    try {
+      maybeRenderTechnicianSkills();
+    } catch (_) {}
+  }
 }
 
 function closeSignupModal() {
-  document.getElementById("signupModal").style.display = "none";
-  document.body.style.overflow = "auto";
+  const modal = document.getElementById("signupModal");
+  if (modal) {
+    modal.style.display = "none";
+    document.body.style.overflow = "auto";
+  }
 }
 
 // Select service function
 function selectService(serviceName) {
-  document.getElementById("serviceType").value = serviceName;
+  // Check if user is logged in
+  if (!getToken()) {
+    showNotification("Please login to select a service.", "info");
+    return;
+  }
+
+  const serviceTypeEl = document.getElementById("serviceType");
+  if (serviceTypeEl) {
+    serviceTypeEl.value = serviceName;
+  }
   openBookingModal();
 }
+
+// API base
+// IMPORTANT: Backend runs on port 9000 (see backend/.env)
+const API_BASE = "http://localhost:9000";
 
 // Form submission handlers with safe event listener
 function safeAddFormSubmitListener(formId, handler) {
@@ -275,106 +470,259 @@ function safeAddFormSubmitListener(formId, handler) {
   }
 }
 
-// Contact form submission handler
-safeAddFormSubmitListener("contactForm", function (e) {
-  // Simulate form submission
-  showNotification(
-    "Message sent successfully! We'll get back to you soon.",
-    "success"
-  );
+// Booking form submission handler
+safeAddFormSubmitListener("bookingForm", async function (e) {
+  const serviceType = document.getElementById("serviceType")?.value || "";
+  const inputs = this.querySelectorAll("input");
+  const selects = this.querySelectorAll("select");
+  const textareas = this.querySelectorAll("textarea");
 
-  // Reset form
-  this.reset();
+  const payload = {
+    serviceType,
+    name: inputs[0]?.value || "",
+    phone: inputs[1]?.value || "",
+    email: inputs[2]?.value || "",
+    address: inputs[3]?.value || "",
+    date: inputs[4]?.value || "",
+    time: selects[1]?.value || "",
+    notes: textareas[0]?.value || "",
+  };
+
+  try {
+    const token = getToken();
+    if (!token) {
+      showNotification("Please login to book a service.", "info");
+      window.location.href = "login.html";
+      return;
+    }
+    const res = await fetch(`${API_BASE}/api/bookings`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || "Booking failed");
+    showNotification(
+      "Booking request submitted successfully! We'll contact you within 30 minutes.",
+      "success"
+    );
+    this.reset();
+    closeBookingModal();
+  } catch (err) {
+    showNotification(err.message || "Booking error", "error");
+  }
 });
 
-// Booking form submission handler
-safeAddFormSubmitListener("bookingForm", function (e) {
-  // Get form data
-  const formData = new FormData(this);
-  const serviceType = document.getElementById("serviceType")
-    ? document.getElementById("serviceType").value
-    : "Unknown";
+// Contact form submission handler
+safeAddFormSubmitListener("contactForm", async function (e) {
+  const inputs = this.querySelectorAll("input");
+  const textarea = this.querySelector("textarea");
 
-  // Simulate form submission
-  showNotification(
-    "Booking request submitted successfully! We'll contact you within 30 minutes.",
-    "success"
-  );
+  const payload = {
+    name: inputs[0]?.value || "",
+    email: inputs[1]?.value || "",
+    phone: inputs[2]?.value || "",
+    message: textarea?.value || "",
+  };
 
-  // Reset form and close modal
-  this.reset();
-  closeBookingModal();
-
-  // In a real application, you would send this data to your server
-  console.log("Booking submitted for:", serviceType);
+  try {
+    const res = await fetch(`${API_BASE}/api/contact`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || "Failed to send message");
+    showNotification(
+      "Message sent successfully! We'll get back to you soon.",
+      "success"
+    );
+    this.reset();
+  } catch (err) {
+    showNotification(err.message || "Contact error", "error");
+  }
 });
 
 // Login form submission
-document.getElementById("loginForm").addEventListener("submit", function (e) {
-  e.preventDefault();
+safeAddFormSubmitListener("loginForm", async function (e) {
+  const email = this.querySelector('input[type="email"]')?.value.trim() || "";
+  const password = this.querySelector('input[type="password"]')?.value || "";
 
-  // Obtain role from prior selection (fallback: user)
-  const role = (function () {
-    try {
-      return localStorage.getItem("quickfix-role") || "user";
-    } catch (_) {
-      return "user";
+  try {
+    // Check if user exists first
+    const checkRes = await fetch(
+      `${API_BASE}/api/auth/check?email=${encodeURIComponent(email)}`
+    );
+    const check = await checkRes.json().catch(() => ({}));
+    if (checkRes.ok && check.exists === false) {
+      showNotification(
+        "No account found for this email. Redirecting to Sign Up...",
+        "info"
+      );
+      // Prefill signup email and open signup modal
+      closeLoginModal();
+      openSignupModal();
+      const signupEmail = document.querySelector(
+        '#signupForm input[type="email"]'
+      );
+      if (signupEmail) signupEmail.value = email;
+      return;
     }
-  })();
 
-  // Simulate login
-  showNotification(
-    `Login successful as ${
-      role === "technician" ? "Technician" : "User"
-    }! Welcome back to QuickFix.`,
-    "success"
-  );
-
-  // Reset form and close modal
-  this.reset();
-  closeLoginModal();
-
-  // In a real application, you would authenticate the user
-  console.log("User logged in as", role);
+    // Proceed to login
+    const res = await fetch(`${API_BASE}/api/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || "Login failed");
+    setStorageItem("quickfix-token", data.token);
+    setStorageItem("quickfix-user", JSON.stringify(data.user));
+    setStorageItem("quickfix-role", data.user?.role || "user");
+    showNotification("Login successful! Welcome back to QuickFix.", "success");
+    this.reset();
+    closeLoginModal();
+    renderAuthUI(); // Update UI after login
+  } catch (err) {
+    showNotification(err.message || "Login error", "error");
+  }
 });
 
+// Render skills list if role is technician
+async function maybeRenderTechnicianSkills() {
+  const role = getStorageItem("quickfix-role") || "user";
+  const container = document.getElementById("technicianSkills");
+  const skillsList = document.getElementById("skillsList");
+  if (!container || !skillsList) return;
+
+  if (role === "technician") {
+    container.style.display = "";
+    if (skillsList.childElementCount === 0) {
+      // Fetch skills from backend
+      try {
+        const res = await fetch(`${API_BASE}/api/skills/all`);
+        const data = await res.json();
+        const skills = (data && data.skills) ? data.skills : [];
+        // Render checkboxes
+        skillsList.innerHTML = skills
+          .map(
+            (s, i) =>
+              `<label style="display:flex; align-items:center; gap:8px;">
+                 <input type="checkbox" name="tech-skill" value="${s}"> <span style="text-transform:capitalize;">${s}</span>
+               </label>`
+          )
+          .join("");
+      } catch (err) {
+        console.warn("Failed to load skills:", err);
+        skillsList.innerHTML = `<div style="color:#ef4444;">Failed to load skills. Please try again later.</div>`;
+      }
+    }
+  } else {
+    container.style.display = "none";
+  }
+}
+
 // Signup form submission
-document.getElementById("signupForm").addEventListener("submit", function (e) {
-  e.preventDefault();
+safeAddFormSubmitListener("signupForm", async function (e) {
+  const inputs = this.querySelectorAll("input");
+  const fullName = inputs[0]?.value.trim() || "";
+  const email = inputs[1]?.value.trim() || "";
+  const phone = inputs[2]?.value.trim() || "";
+  const password = inputs[3]?.value || "";
+  const confirmPassword = inputs[4]?.value || "";
 
-  // Get password fields
-  const password = this.querySelector(
-    'input[type="password"]:nth-of-type(1)'
-  ).value;
-  const confirmPassword = this.querySelector(
-    'input[type="password"]:nth-of-type(2)'
-  ).value;
-
-  // Check if passwords match
   if (password !== confirmPassword) {
     showNotification("Passwords do not match. Please try again.", "error");
     return;
   }
 
-  // Simulate signup
-  showNotification(
-    "Account created successfully! Welcome to QuickFix.",
-    "success"
-  );
+  try {
+    // Check if user exists first
+    const checkRes = await fetch(
+      `${API_BASE}/api/auth/check?email=${encodeURIComponent(email)}`
+    );
+    const check = await checkRes.json().catch(() => ({}));
+    if (checkRes.ok && check.exists === true) {
+      showNotification(
+        "An account already exists for this email. Redirecting to Login...",
+        "info"
+      );
+      closeSignupModal();
+      openLoginModal();
+      const loginEmail = document.querySelector(
+        '#loginForm input[type="email"]'
+      );
+      if (loginEmail) loginEmail.value = email;
+      return;
+    }
 
-  // Reset form and close modal
-  this.reset();
-  closeSignupModal();
+    // Proceed to signup
+    const role = getStorageItem("quickfix-role") || "user";
 
-  // In a real application, you would create the user account
-  console.log("New user account created");
+    // collect skills if technician
+    let skills = [];
+    if (role === "technician") {
+      skills = Array.from(
+        document.querySelectorAll('#signupForm input[name="tech-skill"]:checked')
+      ).map(el => String(el.value).trim().toLowerCase());
+      if (skills.length === 0) {
+        showNotification("Please select at least one skill to sign up as a technician.", "error");
+        return;
+      }
+    }
+
+    const res = await fetch(`${API_BASE}/api/auth/signup`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: fullName,
+        email,
+        phone,
+        password,
+        role,
+        ...(role === "technician" ? { skills } : {}),
+      }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || "Signup failed");
+    setStorageItem("quickfix-token", data.token);
+    setStorageItem("quickfix-user", JSON.stringify(data.user));
+    setStorageItem("quickfix-role", data.user?.role || "user");
+    showNotification(
+      "Account created successfully! Welcome to QuickFix.",
+      "success"
+    );
+    this.reset();
+    closeSignupModal();
+    renderAuthUI(); // Update UI after signup
+  } catch (err) {
+    showNotification(err.message || "Signup error", "error");
+  }
 });
 
+// Language selector functionality
 (function () {
   const languageSelector = document.querySelector(
     ".language-selector-container"
   );
-  if (!languageSelector) return;
+  if (!languageSelector) {
+    // Fallback for simple language selector
+    const langSel = document.querySelector(".language-selector");
+    if (langSel) {
+      langSel.addEventListener("change", function (e) {
+        const selectedLanguage = e.target.value;
+        const label = e.target.options[e.target.selectedIndex].text;
+        showNotification(`Language changed to ${label}`, "info");
+        setStorageItem("quickfix-language", selectedLanguage);
+        console.log("Language changed to:", selectedLanguage);
+      });
+    }
+    return;
+  }
 
   const currentLanguage = languageSelector.querySelector(".current-language");
   const languageDropdown = languageSelector.querySelector(".language-dropdown");
@@ -386,14 +734,16 @@ document.getElementById("signupForm").addEventListener("submit", function (e) {
   // Show dropdown on hover
   languageSelector.addEventListener("mouseenter", function () {
     clearTimeout(hoverTimeout);
-    languageDropdown.style.display = "block";
-    isOpen = true;
+    if (languageDropdown) {
+      languageDropdown.style.display = "block";
+      isOpen = true;
+    }
   });
 
   // Hide dropdown when mouse leaves (with small delay)
   languageSelector.addEventListener("mouseleave", function () {
     hoverTimeout = setTimeout(() => {
-      if (isOpen) {
+      if (isOpen && languageDropdown) {
         languageDropdown.style.display = "none";
         isOpen = false;
       }
@@ -403,14 +753,16 @@ document.getElementById("signupForm").addEventListener("submit", function (e) {
   // Toggle dropdown on click (for mobile/accessibility)
   languageSelector.addEventListener("click", function (e) {
     e.stopPropagation();
-    const isVisible = languageDropdown.style.display === "block";
-    languageDropdown.style.display = isVisible ? "none" : "block";
-    isOpen = !isVisible;
+    if (languageDropdown) {
+      const isVisible = languageDropdown.style.display === "block";
+      languageDropdown.style.display = isVisible ? "none" : "block";
+      isOpen = !isVisible;
+    }
   });
 
   // Close dropdown when clicking outside
   document.addEventListener("click", function (e) {
-    if (!languageSelector.contains(e.target)) {
+    if (!languageSelector.contains(e.target) && languageDropdown) {
       languageDropdown.style.display = "none";
       isOpen = false;
     }
@@ -424,25 +776,24 @@ document.getElementById("signupForm").addEventListener("submit", function (e) {
       const langText = this.textContent.trim();
 
       // Update current language display
-      currentLanguage.innerHTML = `
-                <i class="fas fa-globe me-2"></i>
-                ${lang.toUpperCase()}
-            `;
+      if (currentLanguage) {
+        currentLanguage.innerHTML = `
+                    <i class="fas fa-globe me-2"></i>
+                    ${lang.toUpperCase()}
+                `;
+      }
 
       // Hide dropdown
-      languageDropdown.style.display = "none";
+      if (languageDropdown) {
+        languageDropdown.style.display = "none";
+      }
       isOpen = false;
 
       // Show notification
       showNotification(`Language changed to ${langText}`, "info");
 
-      // Store selected language (optional)
-      try {
-        localStorage.setItem("quickfix-language", lang);
-      } catch (e) {
-        console.log("Could not save language preference");
-      }
-
+      // Store selected language
+      setStorageItem("quickfix-language", lang);
       console.log("Language changed to:", lang);
     });
   });
@@ -531,17 +882,19 @@ function showNotification(message, type = "info") {
         }
       }, 300);
     }
-  }, 5000);
+  }, 9000);
 }
 
 function closeNotification(button) {
   const notification = button.closest(".notification");
-  notification.style.animation = "slideInRight 0.3s ease reverse";
-  setTimeout(() => {
-    if (notification.parentNode) {
-      notification.remove();
-    }
-  }, 300);
+  if (notification) {
+    notification.style.animation = "slideInRight 0.3s ease reverse";
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.remove();
+      }
+    }, 300);
+  }
 }
 
 // Animate elements on scroll
@@ -765,7 +1118,7 @@ function typeWriter(element, text, speed = 100) {
   type();
 }
 
-// Initialize typing effect
+// Initialize typing effect and active navigation links
 document.addEventListener("DOMContentLoaded", function () {
   const heroTitle = document.querySelector(".hero-content h1");
 
@@ -783,17 +1136,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initializeActiveLinks();
 });
 
-// var languageSelector = document.querySelector('.language-selector');
-//     if (languageSelector) {
-//       languageSelector.addEventListener('change', function (e) {
-//         try {
-//           var label = e.target.options[e.target.selectedIndex].text;
-//           // Minimal UX: quick toast-like alert (replace with nicer UI if desired)
-//           console.log('Language changed to: ' + label);
-//         } catch (_) {}
-//       });
-//     }
-
+// Feature alert for coming soon features
 function featureAlert() {
-  alert("🚧 This feature is coming soon. Stay tuned!");
+  showNotification("🚧 This feature is coming soon. Stay tuned!", "info");
 }
