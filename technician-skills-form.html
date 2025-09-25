@@ -269,114 +269,42 @@
 <script>
 // Skills data (this should come from your API in production)
 const skillsData = {
-    ELECTRICAL: {
-        name: 'Electrical',
-        icon: 'fas fa-bolt',
-        description: 'Electrical installations, repairs, and maintenance',
-        skills: [
-            'electrical wiring', 'electrical repair', 'switch and socket installation',
-            'ceiling fan installation', 'lighting installation', 'electrical troubleshooting',
-            'circuit breaker repair', 'electrical panel upgrade', 'outdoor lighting',
-            'electrical safety inspection'
-        ]
-    },
     PLUMBING: {
-        name: 'Plumbing',
+        name: 'Plumbing Service',
         icon: 'fas fa-wrench',
-        description: 'Plumbing installations, repairs, and maintenance',
-        skills: [
-            'pipe repair', 'drain cleaning', 'faucet installation', 'toilet repair',
-            'water heater repair', 'bathroom fitting', 'kitchen plumbing', 'pipe installation',
-            'leak detection', 'sewer line repair', 'water pressure issues', 'plumbing maintenance'
-        ]
+        description: 'Professional plumbing services'
+    },
+    ELECTRICAL: {
+        name: 'Electrical Service',
+        icon: 'fas fa-bolt',
+        description: 'Professional electrical services'
     },
     AC_HVAC: {
-        name: 'AC & HVAC',
+        name: 'AC Repair',
         icon: 'fas fa-snowflake',
-        description: 'Air conditioning and heating system services',
-        skills: [
-            'ac repair', 'ac installation', 'ac maintenance', 'hvac repair',
-            'refrigerator repair', 'air conditioner cleaning', 'ac gas refilling',
-            'central air conditioning', 'split ac service', 'window ac repair',
-            'heat pump repair', 'thermostat installation'
-        ]
-    },
-    CARPENTRY: {
-        name: 'Carpentry',
-        icon: 'fas fa-hammer',
-        description: 'Wood work, furniture assembly, and carpentry services',
-        skills: [
-            'furniture assembly', 'door installation', 'window installation',
-            'cabinet installation', 'shelving installation', 'flooring installation',
-            'custom furniture', 'wood repair', 'deck construction', 'trim installation',
-            'furniture repair', 'wooden framework'
-        ]
+        description: 'Air conditioning and HVAC services'
     },
     PAINTING: {
         name: 'Painting',
         icon: 'fas fa-paint-brush',
-        description: 'Interior and exterior painting services',
-        skills: [
-            'interior painting', 'exterior painting', 'wall painting', 'ceiling painting',
-            'furniture painting', 'texture painting', 'spray painting', 'wallpaper installation',
-            'wall preparation', 'color consultation', 'decorative painting', 'paint removal'
-        ]
+        description: 'Interior and exterior painting'
+    },
+    CARPENTRY: {
+        name: 'Carpentry',
+        icon: 'fas fa-hammer',
+        description: 'Woodwork and carpentry services'
     },
     APPLIANCE_REPAIR: {
         name: 'Appliance Repair',
         icon: 'fas fa-tools',
-        description: 'Home appliance repair and maintenance',
-        skills: [
-            'washing machine repair', 'dishwasher repair', 'microwave repair', 'oven repair',
-            'refrigerator repair', 'dryer repair', 'garbage disposal repair', 'water heater repair',
-            'small appliance repair', 'appliance installation', 'appliance maintenance', 'vacuum cleaner repair'
-        ]
-    },
-    CLEANING: {
-        name: 'Cleaning',
-        icon: 'fas fa-broom',
-        description: 'Professional cleaning and maintenance services',
-        skills: [
-            'house cleaning', 'deep cleaning', 'carpet cleaning', 'window cleaning',
-            'office cleaning', 'post-construction cleaning', 'move-in/move-out cleaning',
-            'pressure washing', 'upholstery cleaning', 'floor cleaning', 'bathroom cleaning', 'kitchen cleaning'
-        ]
-    },
-    GARDENING: {
-        name: 'Gardening & Landscaping',
-        icon: 'fas fa-leaf',
-        description: 'Garden maintenance and landscaping services',
-        skills: [
-            'lawn mowing', 'garden maintenance', 'tree trimming', 'landscaping',
-            'plant installation', 'irrigation system', 'hedge trimming', 'weed removal',
-            'soil preparation', 'garden design', 'pest control', 'seasonal cleanup'
-        ]
-    },
-    HANDYMAN: {
-        name: 'General Handyman',
-        icon: 'fas fa-toolbox',
-        description: 'General maintenance and repair services',
-        skills: [
-            'general repairs', 'home maintenance', 'fixture installation', 'drywall repair',
-            'caulking', 'weatherproofing', 'minor electrical work', 'minor plumbing work',
-            'assembly services', 'mounting services', 'general troubleshooting', 'maintenance checks'
-        ]
-    },
-    PEST_CONTROL: {
-        name: 'Pest Control',
-        icon: 'fas fa-bug',
-        description: 'Pest identification, elimination, and prevention services',
-        skills: [
-            'termite control', 'cockroach control', 'ant control', 'rodent control',
-            'bed bug treatment', 'mosquito control', 'fly control', 'general pest control',
-            'fumigation', 'pest inspection', 'preventive treatment', 'organic pest control'
-        ]
+        description: 'Home appliance repair and maintenance'
     }
 };
 
+// Update popular skills to match service categories
 const popularSkills = [
-    'electrical repair', 'plumbing repair', 'ac repair', 'house cleaning',
-    'furniture assembly', 'interior painting', 'general repairs', 'appliance repair'
+    'Plumbing Service', 'Electrical Service', 'AC Repair', 
+    'Painting', 'Carpentry', 'Appliance Repair'
 ];
 
 let selectedSkills = new Set();
@@ -413,7 +341,10 @@ function displayPopularSkills() {
         button.type = 'button';
         button.className = 'bg-white border-2 border-yellow-400 text-yellow-800 px-3 py-2 rounded-lg text-sm font-medium hover:bg-yellow-50 transition-colors';
         button.innerHTML = `<i class="fas fa-star mr-1"></i>${skill}`;
-        button.onclick = () => toggleSkill(skill, button);
+        button.onclick = () => {
+            const checkbox = document.getElementById(`skill-${Object.keys(skillsData).find(key => skillsData[key].name === skill)}`);
+            checkbox.click();
+        };
         container.appendChild(button);
     });
 }
@@ -425,50 +356,19 @@ function displaySkillCategories() {
     
     Object.entries(skillsData).forEach(([key, category]) => {
         const categoryDiv = document.createElement('div');
-        categoryDiv.className = 'skill-category p-6';
-        
-        const selectedInCategory = category.skills.filter(skill => selectedSkills.has(skill)).length;
+        categoryDiv.className = 'skill-category p-6 cursor-pointer';
         
         categoryDiv.innerHTML = `
-            <div class="cursor-pointer" onclick="toggleCategory('${key}')">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center">
-                        <i class="${category.icon} text-2xl text-blue-600 mr-4"></i>
-                        <div>
-                            <h3 class="font-semibold text-lg text-gray-900">${category.name}</h3>
-                            <p class="text-gray-600 text-sm">${category.description}</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center">
-                        ${selectedInCategory > 0 ? `<span class="selected-skills-badge">${selectedInCategory}</span>` : ''}
-                        <i class="fas fa-chevron-down ml-2 transition-transform duration-200" id="chevron-${key}"></i>
+            <div class="flex items-center justify-between" onclick="toggleSkill('${key}')">
+                <div class="flex items-center">
+                    <i class="${category.icon} text-2xl text-blue-600 mr-4"></i>
+                    <div>
+                        <h3 class="font-semibold text-lg text-gray-900">${category.name}</h3>
+                        <p class="text-gray-600 text-sm">${category.description}</p>
                     </div>
                 </div>
-                <div class="category-stats">
-                    ${category.skills.length} skills available
-                </div>
-            </div>
-            <div id="skills-${key}" class="skills-list mt-4 hidden">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    ${category.skills.map(skill => `
-                        <label class="skill-item flex items-center p-3 rounded-lg border hover:bg-gray-50 cursor-pointer">
-                            <input type="checkbox" class="skill-checkbox text-blue-600" 
-                                   onchange="toggleSkillFromCheckbox('${skill}', this)"
-                                   ${selectedSkills.has(skill) ? 'checked' : ''}>
-                            <span class="text-gray-700">${skill}</span>
-                        </label>
-                    `).join('')}
-                </div>
-                <div class="mt-4 pt-3 border-t">
-                    <button type="button" onclick="selectAllInCategory('${key}')" 
-                            class="text-blue-600 hover:text-blue-800 text-sm font-medium mr-4">
-                        Select All
-                    </button>
-                    <button type="button" onclick="clearCategorySelection('${key}')" 
-                            class="text-red-600 hover:text-red-800 text-sm font-medium">
-                        Clear Selection
-                    </button>
-                </div>
+                <input type="checkbox" class="skill-checkbox" id="skill-${key}" 
+                       onchange="updateSkillSelection('${key}', this.checked)">
             </div>
         `;
         
@@ -476,80 +376,23 @@ function displaySkillCategories() {
     });
 }
 
-// Toggle category expansion
-function toggleCategory(categoryKey) {
-    const skillsList = document.getElementById(`skills-${categoryKey}`);
-    const chevron = document.getElementById(`chevron-${categoryKey}`);
-    const categoryDiv = skillsList.closest('.skill-category');
-    
-    if (skillsList.classList.contains('hidden')) {
-        skillsList.classList.remove('hidden');
-        chevron.classList.add('rotate-180');
-        categoryDiv.classList.add('expanded');
+// Update skill selection
+function updateSkillSelection(key, isChecked) {
+    if (isChecked) {
+        selectedSkills.add(key);
     } else {
-        skillsList.classList.add('hidden');
-        chevron.classList.remove('rotate-180');
-        categoryDiv.classList.remove('expanded');
-    }
-}
-
-// Toggle individual skill
-function toggleSkill(skill, buttonElement = null) {
-    if (selectedSkills.has(skill)) {
-        selectedSkills.delete(skill);
-        if (buttonElement) buttonElement.classList.remove('bg-blue-600', 'text-white');
-    } else {
-        selectedSkills.add(skill);
-        if (buttonElement) {
-            buttonElement.classList.add('bg-blue-600', 'text-white');
-            buttonElement.classList.remove('bg-white', 'text-yellow-800');
-        }
+        selectedSkills.delete(key);
     }
     
     updateSelectedCount();
     updateSkillsPreview();
-    updateCategoryBadges();
 }
 
-// Toggle skill from checkbox
-function toggleSkillFromCheckbox(skill, checkbox) {
-    if (checkbox.checked) {
-        selectedSkills.add(skill);
-    } else {
-        selectedSkills.delete(skill);
-    }
-    
-    updateSelectedCount();
-    updateSkillsPreview();
-    updateCategoryBadges();
-}
-
-// Select all skills in a category
-function selectAllInCategory(categoryKey) {
-    const category = skillsData[categoryKey];
-    category.skills.forEach(skill => selectedSkills.add(skill));
-    
-    // Update checkboxes
-    const checkboxes = document.querySelectorAll(`#skills-${categoryKey} input[type="checkbox"]`);
-    checkboxes.forEach(cb => cb.checked = true);
-    
-    updateSelectedCount();
-    updateSkillsPreview();
-    updateCategoryBadges();
-}
-
-// Clear category selection
-function clearCategorySelection(categoryKey) {
-    const category = skillsData[categoryKey];
-    category.skills.forEach(skill => selectedSkills.delete(skill));
-    
-    // Update checkboxes
-    const checkboxes = document.querySelectorAll(`#skills-${categoryKey} input[type="checkbox"]`);
-    checkboxes.forEach(cb => cb.checked = false);
-    
-    updateSelectedCount();
-    updateSkillsPreview();
-    updateCategoryBadges();
+// Modify toggleSkill to work with simplified categories
+function toggleSkill(key) {
+    const checkbox = document.getElementById(`skill-${key}`);
+    checkbox.checked = !checkbox.checked;
+    updateSkillSelection(key, checkbox.checked);
 }
 
 // Update selected count
@@ -585,79 +428,12 @@ function removeSkill(skill) {
     
     updateSelectedCount();
     updateSkillsPreview();
-    updateCategoryBadges();
 }
 
-// Update category badges
-function updateCategoryBadges() {
-    Object.entries(skillsData).forEach(([key, category]) => {
-        const selectedInCategory = category.skills.filter(skill => selectedSkills.has(skill)).length;
-        const categoryDiv = document.querySelector(`#skills-${key}`).closest('.skill-category');
-        
-        // Update badge
-        const existingBadge = categoryDiv.querySelector('.selected-skills-badge');
-        if (existingBadge) existingBadge.remove();
-        
-        if (selectedInCategory > 0) {
-            const badge = document.createElement('span');
-            badge.className = 'selected-skills-badge';
-            badge.textContent = selectedInCategory;
-            
-            const chevron = document.getElementById(`chevron-${key}`);
-            chevron.parentElement.insertBefore(badge, chevron);
-        }
-    });
-}
-
-// Setup search functionality
+// Remove search functionality
 function setupSearch() {
     const searchInput = document.getElementById('skillSearch');
-    searchInput.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase().trim();
-        filterSkills(query);
-    });
-}
-
-// Filter skills based on search
-function filterSkills(query) {
-    if (!query) {
-        // Show all categories
-        Object.keys(skillsData).forEach(key => {
-            const categoryDiv = document.querySelector(`#skills-${key}`).closest('.skill-category');
-            categoryDiv.style.display = 'block';
-            
-            // Show all skills within categories
-            const skillItems = categoryDiv.querySelectorAll('.skill-item');
-            skillItems.forEach(item => item.style.display = 'flex');
-        });
-        return;
-    }
-
-    Object.entries(skillsData).forEach(([key, category]) => {
-        const categoryDiv = document.querySelector(`#skills-${key}`).closest('.skill-category');
-        const skillItems = categoryDiv.querySelectorAll('.skill-item');
-        
-        let categoryHasMatches = false;
-        
-        // Check if category name matches
-        if (category.name.toLowerCase().includes(query)) {
-            categoryHasMatches = true;
-            skillItems.forEach(item => item.style.display = 'flex');
-        } else {
-            // Check individual skills
-            skillItems.forEach(item => {
-                const skillName = item.querySelector('span').textContent.toLowerCase();
-                if (skillName.includes(query)) {
-                    item.style.display = 'flex';
-                    categoryHasMatches = true;
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        }
-        
-        categoryDiv.style.display = categoryHasMatches ? 'block' : 'none';
-    });
+    searchInput.style.display = 'none'; // Hide search input
 }
 
 // Form submission

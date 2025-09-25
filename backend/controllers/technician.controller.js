@@ -136,12 +136,12 @@ export const getAllTechnicians = async (req, res) => {
       const st = String(serviceType).trim().toLowerCase();
       // Map common service slugs to full skill lists so cards match categories
       const SLUG_TO_SKILLS = {
-        electrical: SERVICE_CATEGORIES.ELECTRICAL?.skills || [],
-        plumbing: SERVICE_CATEGORIES.PLUMBING?.skills || [],
-        ac: SERVICE_CATEGORIES.AC_HVAC?.skills || [],
-        carpentry: SERVICE_CATEGORIES.CARPENTRY?.skills || [],
-        painting: SERVICE_CATEGORIES.PAINTING?.skills || [],
-        appliance: SERVICE_CATEGORIES.APPLIANCE_REPAIR?.skills || [],
+        electrical: ['electrical service', 'electrical'],
+        plumbing: ['plumbing service', 'plumbing'],
+        ac: ['ac repair', 'ac'],
+        carpentry: ['carpentry', 'carpentry service'],
+        painting: ['painting', 'painting service'],
+        appliance: ['appliance repair', 'appliance']
       };
       const expanded = [st, ...(SLUG_TO_SKILLS[st] || [])].map(s => String(s).toLowerCase());
       filter.skills = { $in: expanded };

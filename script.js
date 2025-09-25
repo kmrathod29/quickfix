@@ -602,17 +602,22 @@ async function maybeRenderTechnicianSkills() {
   if (role === "technician") {
     container.style.display = "";
     if (skillsList.childElementCount === 0) {
-      // Fetch skills from backend
+      // Fetch service categories from backend
       try {
-        const res = await fetch(`${API_BASE}/api/skills/all`);
+        const res = await fetch(`${API_BASE}/api/skills/categories`);
         const data = await res.json();
-        const skills = (data && data.skills) ? data.skills : [];
-        // Render checkboxes
-        skillsList.innerHTML = skills
+        const categories = data && data.categories ? Object.values(data.categories) : [];
+        
+        // Render checkboxes for service categories
+        skillsList.innerHTML = categories
           .map(
-            (s, i) =>
+            (category, i) =>
               `<label style="display:flex; align-items:center; gap:8px;">
-                 <input type="checkbox" name="tech-skill" value="${s}"> <span style="text-transform:capitalize;">${s}</span>
+                 <input type="checkbox" name="tech-skill" value="${category.name}"> 
+                 <span style="display:flex; align-items:center; gap:8px;">
+                   <i class="${category.icon} mr-2"></i>
+                   <span>${category.name}</span>
+                 </span>
                </label>`
           )
           .join("");

@@ -158,7 +158,7 @@
                         <li>Door & window repair</li>
                         <li>Deck construction</li>
                     </ul>
-                    <button class="service-btn" onclick="selectService('Carpentry')">Select Service</button>
+                    <button class="service-btn" onclick="showTechnicians('carpentry')">Select Service</button>
                 </div>
 
                 <!-- AC Repair -->
@@ -587,7 +587,8 @@
                 'electrical': 'Electrical Experts',
                 'ac': 'AC Repair Technicians',
                 'painting': 'Professional Painters',
-                'appliance': 'Appliance Repair Experts'
+                'appliance': 'Appliance Repair Experts',
+                'carpentry': 'Carpentry Experts'
             };
             title.textContent = serviceNames[serviceType] || 'Available Technicians';
 
